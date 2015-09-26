@@ -1,6 +1,9 @@
 @import url("font-awesome.min.css");
 @import url("http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,600,600italic");
 
+
+
+
 /* login boton*/
         
         #login {
@@ -116,6 +119,11 @@
 		}
 
 	}
+	 #containerlogin{
+	 width: 200px;
+	 text-align: center;
+	 
+	 }
 
 	@media screen and (max-width: 1280px) {
 
@@ -3146,7 +3154,7 @@
 
 			#cta {
 				padding: 20px;
-			}
+			}S
 
 		/* Footer */
 
@@ -3154,4 +3162,8 @@
 				padding: 2em 20px;
 				text-align: left;
 			}
+			
+					}
+					
+					
         
