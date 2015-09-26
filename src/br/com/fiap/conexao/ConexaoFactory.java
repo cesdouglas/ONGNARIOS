@@ -6,6 +6,6 @@ import java.sql.DriverManager;
 public class ConexaoFactory {
 	public Connection getConnection() throws Exception{
 		Class.forName("oracle.jdbc.driver.OracleDriver");
-		return DriverManager.getConnection("jdbc:oracle:thin:/:@192.168.60.15:1521:ORCL", "OPS$RM73872", "290992");
+		return DriverManager.getConnection("jdbc:oracle:thin:/:@oracle.fiap.com.br:1521:ORCL", "OPS$RM73872", "290992");
 	}
 }
