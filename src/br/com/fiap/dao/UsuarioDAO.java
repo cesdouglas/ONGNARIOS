@@ -66,7 +66,7 @@ public class UsuarioDAO {
 		return saida;
 	}
 	
-//	public UsuarioBean login(String cpf, String senha) throws Exception{
+//	public UsuarioBean login(String cpf, String senha) throws Exception{	
 //		String sql = "SELECT * FROM T_ONG_USUARIO WHERE nr_cpf LIKE ? AND ds_senha = ?";
 //		PreparedStatement estrutura = conexao.prepareStatement(sql);
 //		estrutura.setString(1, cpf);
