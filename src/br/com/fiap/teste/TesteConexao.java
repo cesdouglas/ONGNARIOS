@@ -10,7 +10,8 @@ import br.com.fiap.conexao.ConexaoFactory;
 public class TesteConexao {
 	public static void main(String[] args) throws Exception {
 		Connection conexao = new ConexaoFactory().getConnection();	
-		
+		try{
+			
 		String sql = "SELECT * FROM T_ONG_USUARIO WHERE nr_cnpj LIKE ?";
 		PreparedStatement estrutura = conexao.prepareStatement(sql);
 		estrutura.setString(1, "1");
@@ -24,5 +25,10 @@ public class TesteConexao {
 		e.setDs_senha(resultado.getString("ds_senha"));	
 		resultado.close();
 		estrutura.close();
+		
+		}catch (Exception e){
+			System.out.println(e);
+		}
+		
 	}
 }

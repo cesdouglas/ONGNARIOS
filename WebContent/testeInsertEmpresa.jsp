@@ -9,7 +9,7 @@
 <title>Teste insert</title>
 </head>
 <body>
-	<form action="midlet" method="get">
+	<form action="midlet" method="post">
 		cnpj<input type="text" name="cnpj"><br>
 		nome<input type="text" name="nome"><br>
 		endereco<input type="text" name="endereco"><br>
