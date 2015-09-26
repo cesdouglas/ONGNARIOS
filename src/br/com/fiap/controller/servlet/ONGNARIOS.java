@@ -64,10 +64,9 @@ public class ONGNARIOS extends HttpServlet {
     	e.setNr_ddd(Integer.parseInt(request.getParameter("ddd")));
     	e.setDs_email(request.getParameter("email"));
     	e.setDs_senha(request.getParameter("senha"));    	
-    	System.out.println("servlet");
     	new EmpresaBO().inserir(e);
     	request.setAttribute("msg", "Cliente cadastrado com sucesso!!!");
-    	request.getRequestDispatcher("testeInsertEmpresa.jsp").forward(request, response);
+    	request.getRequestDispatcher("index.jsp").forward(request, response);
     }
     
 
@@ -76,11 +75,6 @@ public class ONGNARIOS extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		try{
-			inserirEmpresa(request,response);			
-		}catch(Exception e){
-			System.out.println(e);
-		}
 	}
 
 	/**
@@ -88,6 +82,12 @@ public class ONGNARIOS extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		try{
+			inserirEmpresa(request,response);			
+		}catch(Exception e){
+			System.out.println(e);
+		}
+		
 		try{
 			processarLoginUsuario(request,response);			
 		}catch(Exception e){

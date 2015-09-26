@@ -62,37 +62,36 @@
                                 <h3>Cadastro</h3>
                                 
                                 <!--Cadastro-->
-								<form>
+								<form action="midlet" method="post">
 									
                                     <div class="row 50%">
-										<div class="6u 12u(mobilep)">
-											
+										<div class="6u 12u(mobilep)">	
+                                            <input type="text" name="nome" id="name" placeholder="Nome" />
+										</div>
+										
+										<div class="2u 3u(mobilep)">
+                                            <input type="text" name="ddd" id="ddd" placeholder="ddd" maxlength="2"/>
+										</div>
+										
+										<div class="4u 12u(mobilep)">								
                                             
-                                            <input type="text" name="name" id="name" placeholder="Nome" />
-								</div>
-                                        
-                                        
-                                        
-										<div class="6u 12u(mobilep)">								
-                                            
-                                            <input type="text" name="sobrenome" id="sobrenome" placeholder="Sobrenome" />
+                                            <input type="text" name="telefone" id="telefone" placeholder="telefone" maxlength="9"/>
 										</div>
 									
-                                    
                                    		<div class="6u 12u(mobilep)">
-											<input type="text" name="CPF" id="cpf" placeholder="CPF" />
+											<input type="text" name="cnpj" id="cnpj" placeholder="CNPJ" maxlength="14"/>
 										</div>	
                             
 										<div class="6u 12u(mobilep)">
-											<input type="text" name="email" id="email" placeholder="Email" /> 
+											<input type="text" name="email" id="email" placeholder="Email" maxlength="40"/> 
                                         </div>
                                         
                                             <div class="6u 12u(mobilep)">
-											<input type="text" name="endereco" id="endereco" placeholder="Endereço"/>
+											<input type="text" name="endereco" id="endereco" placeholder="Endereço" maxlength="50"/>
                                         </div>
                                     
                                         <div class="6u 12u(mobilep)">
-											<input type="text" name="senha" id="senha" placeholder="Senha" />
+											<input type="text" name="senha" id="senha" placeholder="Senha" maxlength="12"/>
                                         </div>
                                         <div class="row 50%">
 										<div class="12u">
