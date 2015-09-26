@@ -45,6 +45,7 @@ public class ONGNARIOS extends HttpServlet {
     		session.setAttribute("nr_ddd", e.getNr_ddd());
     		session.setAttribute("ds_email", e.getDs_email());
     		session.setAttribute("ds_senha", e.getDs_senha());
+    		session.setAttribute("logado", "true");
     		request.setAttribute("msg", "Logado com sucesso!");
     		request.getRequestDispatcher("testeLogin.jsp").forward(request, response);
     	}else{
