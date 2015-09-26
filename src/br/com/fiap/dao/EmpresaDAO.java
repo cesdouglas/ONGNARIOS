@@ -14,6 +14,7 @@ public class EmpresaDAO {
 		this.conexao = new ConexaoFactory().getConnection();		
 	}
 	
+	//Insere os dados da ONG
 	public void insert(EmpresaBean e) throws Exception{
 		String sql = "INSERT INTO T_ONG_EMPRESA " + "(nr_cnpj, nm_empresa, ds_endereco, nr_telefone, nr_ddd, ds_email, ds_senha) VALUES (?,?,?,?,?,?,?)";
 		PreparedStatement estrutura = conexao.prepareStatement(sql);
