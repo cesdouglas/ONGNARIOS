@@ -37,7 +37,7 @@ public class ONGNARIOS extends HttpServlet {
     	e.setDs_senha(request.getParameter("senha"));    	
     	new EmpresaBO().inserir(e);
     	request.setAttribute("msg", "Cliente cadastrado com sucesso!!!");
-    	request.getRequestDispatcher("index.jsp").forward(request, response);
+    	request.getRequestDispatcher("testeInsertEmpresa.jsp").forward(request, response);
     }
 
 	/**
@@ -48,7 +48,6 @@ public class ONGNARIOS extends HttpServlet {
 		try{
 			inserirEmpresa(request,response);			
 		}catch(Exception e){
-			e.printStackTrace();
 			System.out.println(e);
 		}
 	}
