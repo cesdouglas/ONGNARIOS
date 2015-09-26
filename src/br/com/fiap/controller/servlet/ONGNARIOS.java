@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import br.com.fiap.beans.EmpresaBean;
+import br.com.fiap.beans.UsuarioBean;
 import br.com.fiap.bo.EmpresaBO;
+import br.com.fiap.bo.UsuarioBO;
 
 /**
  * Servlet implementation class ONGNARIOS
@@ -27,18 +29,29 @@ public class ONGNARIOS extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
     
-//    protected void processarLoginUsuario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
-//    	//Recupera a sessão do usuário ou cria uma nova se não
-//    	// existe
-//    	String login = request.getParameter("login");
-//    	String senha = request.getParameter("senha");    	
-//    	HttpSession session = request.getSession();
-//    	//Adiciona o atributo usuário na sessão
-//    	session.setAttribute("cpf", "Thiago");
-//    	session.setAttribute("nome", "Thiago");
-//    	//Recupera o atributo usuario da sessão
-//    	String usuario = (String) session.getAttribute("usuario");
-//    }
+    protected void processarLoginUsuario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
+    	//Recupera a sessão do usuário ou cria uma nova se não
+    	// existe
+    	String login = request.getParameter("nr_cpf");
+    	String senha = request.getParameter("ds_senha"); 
+    	UsuarioBO bo = new UsuarioBO();
+    	if(bo.entrar(login, senha)){
+    		UsuarioBean e = new UsuarioBean();
+    		HttpSession session = request.getSession();
+    		//Adiciona o atributo usuário na sessão
+    		session.setAttribute("nr_cpf", e.getNr_cpf());
+    		session.setAttribute("nm_usuario", e.getNm_usuario());
+    		session.setAttribute("nr_telefone", e.getNr_telefone());
+    		session.setAttribute("nr_ddd", e.getNr_ddd());
+    		session.setAttribute("ds_email", e.getDs_email());
+    		session.setAttribute("ds_senha", e.getDs_senha());
+    		request.setAttribute("msg", "Logado com sucesso!");
+    		request.getRequestDispatcher("testeLogin.jsp").forward(request, response);
+    	}else{
+    		request.setAttribute("msg", "CPF ou Senha errada!");
+    		request.getRequestDispatcher("testeLogin.jsp").forward(request, response);
+    	}
+    }
 
     //Insert Empresa
     protected void inserirEmpresa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
@@ -74,6 +87,11 @@ public class ONGNARIOS extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		try{
+			processarLoginUsuario(request,response);			
+		}catch(Exception e){
+			System.out.println(e);
+		}
 	}
 
 }

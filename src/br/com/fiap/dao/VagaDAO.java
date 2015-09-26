@@ -32,6 +32,7 @@ public class VagaDAO {
 		PreparedStatement estrutura = conexao.prepareStatement(sql);
 		estrutura.setString(1, cd_vaga);
 		ResultSet resultado = estrutura.executeQuery();
+		resultado.next();
 		VagaBean e = new VagaBean();
 		e.setCd_vaga(Integer.parseInt(resultado.getString("cd_vaga")));	
 		e.setNm_vaga(resultado.getString("nm_vaga"));

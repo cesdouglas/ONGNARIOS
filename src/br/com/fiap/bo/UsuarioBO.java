@@ -27,4 +27,13 @@ public class UsuarioBO {
 		return dao.delete(cpf);
 	}
 	
+	public boolean entrar(String cpf, String senha) throws Exception{
+		try{
+			dao.login(cpf,senha);
+			return true;
+		}catch(Exception e){
+			System.out.println(e);
+			return false;
+		}
+	}
 }

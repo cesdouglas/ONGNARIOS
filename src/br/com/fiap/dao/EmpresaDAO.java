@@ -33,6 +33,7 @@ public class EmpresaDAO {
 		PreparedStatement estrutura = conexao.prepareStatement(sql);
 		estrutura.setString(1, cnpj);
 		ResultSet resultado = estrutura.executeQuery();
+		resultado.next();
 		EmpresaBean e = new EmpresaBean();
 		e.setNr_cnpj(resultado.getString("nr_cnpj"));
 		e.setNm_empresa(resultado.getString("nm_empresa"));
