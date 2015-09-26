@@ -65,7 +65,7 @@ public class ONGNARIOS extends HttpServlet {
     	e.setDs_email(request.getParameter("email"));
     	e.setDs_senha(request.getParameter("senha"));    	
     	new EmpresaBO().inserir(e);
-    	request.setAttribute("msg", "Cliente cadastrado com sucesso!!!");
+    	request.setAttribute("msg", "Empresa cadastrado com sucesso!!!");
     	request.getRequestDispatcher("index.jsp").forward(request, response);
     }
     
