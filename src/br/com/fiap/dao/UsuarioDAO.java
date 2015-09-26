@@ -66,5 +66,23 @@ public class UsuarioDAO {
 		return saida;
 	}
 	
+//	public UsuarioBean login(String cpf, String senha) throws Exception{
+//		String sql = "SELECT * FROM T_ONG_USUARIO WHERE nr_cpf LIKE ? AND ds_senha = ?";
+//		PreparedStatement estrutura = conexao.prepareStatement(sql);
+//		estrutura.setString(1, cpf);
+//		estrutura.setString(2, senha);
+//		ResultSet resultado = estrutura.executeQuery();
+//		UsuarioBean e = new UsuarioBean();		
+//		e.setNr_cpf(resultado.getString("nr_cpf"));
+//		e.setNm_usuario(resultado.getString("nm_usuario"));
+//		e.setNr_telefone(Integer.parseInt(resultado.getString("nr_telefone")));
+//		e.setNr_ddd(Integer.parseInt(resultado.getString("nr_ddd")));
+//		e.setDs_email(resultado.getString("ds_email"));
+//		e.setDs_senha(resultado.getString("ds_senha"));	
+//		resultado.close();
+//		estrutura.close();
+//		return e;
+//	}
+	
 	
 }

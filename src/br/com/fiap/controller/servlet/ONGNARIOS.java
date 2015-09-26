@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import br.com.fiap.beans.EmpresaBean;
 import br.com.fiap.bo.EmpresaBO;
@@ -25,6 +26,20 @@ public class ONGNARIOS extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
+    
+//    protected void processarLoginUsuario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
+//    	//Recupera a sessão do usuário ou cria uma nova se não
+//    	// existe
+//    	String login = request.getParameter("login");
+//    	String senha = request.getParameter("senha");    	
+//    	HttpSession session = request.getSession();
+//    	//Adiciona o atributo usuário na sessão
+//    	session.setAttribute("cpf", "Thiago");
+//    	session.setAttribute("nome", "Thiago");
+//    	//Recupera o atributo usuario da sessão
+//    	String usuario = (String) session.getAttribute("usuario");
+//    }
+
     //Insert Empresa
     protected void inserirEmpresa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
     	EmpresaBean e = new EmpresaBean();
@@ -35,10 +50,12 @@ public class ONGNARIOS extends HttpServlet {
     	e.setNr_ddd(Integer.parseInt(request.getParameter("ddd")));
     	e.setDs_email(request.getParameter("email"));
     	e.setDs_senha(request.getParameter("senha"));    	
+    	System.out.println("servlet");
     	new EmpresaBO().inserir(e);
     	request.setAttribute("msg", "Cliente cadastrado com sucesso!!!");
     	request.getRequestDispatcher("testeInsertEmpresa.jsp").forward(request, response);
     }
+    
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
