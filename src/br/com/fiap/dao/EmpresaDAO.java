@@ -26,11 +26,11 @@ public class EmpresaDAO {
 		estrutura.setString(6, e.getDs_email());
 		estrutura.setString(7, e.getDs_senha());
 		boolean stmt = estrutura.execute();
+		estrutura.close();
 		if (stmt){
-			estrutura.close();
-			return true;
+			return stmt;
 		}else{
-			return false;
+			return stmt;
 		}
 	}
 	

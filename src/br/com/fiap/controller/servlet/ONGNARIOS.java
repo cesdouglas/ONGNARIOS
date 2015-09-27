@@ -61,7 +61,7 @@ public class ONGNARIOS extends HttpServlet {
 			if(ebo.inserir(Integer.parseInt(request.getParameter("id")),request.getParameter("cnpj"), request.getParameter("nome"), request.getParameter("endereco"), Integer.parseInt(request.getParameter("telefone")),
 					Integer.parseInt(request.getParameter("ddd")), request.getParameter("email"), request.getParameter("senha"))){
 
-				request.setAttribute("msg", "Empresa cadastrado com sucesso!");
+				request.setAttribute("msg", "Empresa cadastrada com sucesso!");
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}else{
 				request.setAttribute("msg", "Ocorreu um erro no cadastro!");
@@ -79,7 +79,7 @@ public class ONGNARIOS extends HttpServlet {
 			if(ubo.inserir(Integer.parseInt(request.getParameter("id")),request.getParameter("cpf"), request.getParameter("nome"), Integer.parseInt(request.getParameter("telefone")),
 					Integer.parseInt(request.getParameter("ddd")), request.getParameter("email"), request.getParameter("senha"))){
 
-				request.setAttribute("msg", "Empresa cadastrado com sucesso!");
+				request.setAttribute("msg", "Usuário cadastrado com sucesso!");
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}else{
 				request.setAttribute("msg", "Ocorreu um erro no cadastro!");
@@ -110,9 +110,9 @@ public class ONGNARIOS extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		try{
-			if (Integer.parseInt(request.getParameter("id"))==1){
+			if (request.getParameter("id")=="1"){
 				inserirEmpresa(request,response);
-			}else if (Integer.parseInt(request.getParameter("id"))==2){
+			}else if (request.getParameter("id")=="2"){
 				inserirUsuario(request, response);
 			}
 			processarLoginUsuario(request,response);
