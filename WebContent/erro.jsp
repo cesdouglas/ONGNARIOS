@@ -26,7 +26,7 @@
 					<div class="box highlight">
 						<i class="icon major fa-exclamation-triangle"></a></i>
 						<h3>
-							ERRO! <br> Página não enxontrada!
+							ERRO! <br> PÃ¡gina nÃ£o encontrada!
 						</h3>
 					</div>
 				</section>
@@ -45,13 +45,13 @@
 						<li><a href="#">AACD</a></li>
 						<li><a href="#">Adote um Gatinho</a></li>
 						<li><a href="#">Rotaract</a></li>
-						<li><a href="#">Fundação Roberto Marinho</a></li>
+						<li><a href="#">FundaÃ§Ã£o Roberto Marinho</a></li>
 						<li><a href="#">Green Peace</a></li>
-						<li><a href="#">Fundação Airton Senna</a></li>
+						<li><a href="#">FundaÃ§Ã£o Airton Senna</a></li>
 					</ul>
 				</section>
 				<section class="3u 6u$(narrower) 12u$(mobilep)">
-					<h3>Dúvidas Frequêntes</h3>
+					<h3>DÃºvidas FrequÃªntes</h3>
 					<ul class="links">
 						<li><a href="duvidas.jsp">Quem somos</a></li>
 						<li><a href="duvidas.jsp">Como ajudar</a></li>
