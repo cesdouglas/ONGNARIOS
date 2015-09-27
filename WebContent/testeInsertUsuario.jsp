@@ -10,10 +10,9 @@
 </head>
 <body>
 	<form action="midlet" method="post">
-		<input type="hidden" name="id" value="1">
-		cnpj<input type="text" name="cnpj"><br>
+		<input type="hidden" name="id" value="2">
+		cpf<input type="text" name="cpf"><br>
 		nome<input type="text" name="nome"><br>
-		endereco<input type="text" name="endereco"><br>
 		telefone<input type="text" name="telefone"><br>
 		ddd<input type="text" name="ddd"><br>
 		email<input type="text" name="email"><br>
