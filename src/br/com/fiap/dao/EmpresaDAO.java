@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import br.com.fiap.beans.EmpresaBean;
 import br.com.fiap.conexao.ConexaoFactory;
 
+//Classe DAO para comunicação com o Banco de dados
 public class EmpresaDAO {
 	private Connection conexao;
 	
@@ -14,7 +15,7 @@ public class EmpresaDAO {
 		this.conexao = new ConexaoFactory().getConnection();		
 	}
 	
-	//Insere os dados da ONG
+	//Insere os dados da Empresa
 	public void insert(EmpresaBean e) throws Exception{
 		String sql = "INSERT INTO T_ONG_EMPRESA " + "(nr_cnpj, nm_empresa, ds_endereco, nr_telefone, nr_ddd, ds_email, ds_senha) VALUES (?,?,?,?,?,?,?)";
 		PreparedStatement estrutura = conexao.prepareStatement(sql);
@@ -29,6 +30,7 @@ public class EmpresaDAO {
 		estrutura.close();		
 	}
 	
+	//Procura empresa pelo CNPJ
 	public EmpresaBean search(String cnpj) throws Exception{
 		String sql = "SELECT * FROM T_ONG_EMPRESA WHERE nr_cnpj LIKE ?";
 		PreparedStatement estrutura = conexao.prepareStatement(sql);
@@ -48,6 +50,7 @@ public class EmpresaDAO {
 		return e;
 	}
 	
+	//Atualiza dados da empresa
 	public int update(EmpresaBean e) throws Exception{
 		PreparedStatement estrutura = this.conexao.prepareStatement("UPDATE T_ONG_EMPRESA SET nm_empresa = ?, ds_endereco = ?, nr_telefone = ?, nr_ddd = ?, ds_email = ?, ds_senha = ? WHERE nr_cnpj = ?");		
 		estrutura.setString(1, e.getNm_empresa());
@@ -71,7 +74,7 @@ public class EmpresaDAO {
 		return saida;
 	}
 	
-	//Verifica login
+	//Verifica se a senha e o login são iguais aos digitados no front
 	public EmpresaBean login(String cnpj, String senha) throws Exception{	
 		String sql = "SELECT * FROM T_ONG_EMPRESA WHERE nr_cnpj LIKE ? AND ds_senha = ?";
 		PreparedStatement estrutura = conexao.prepareStatement(sql);

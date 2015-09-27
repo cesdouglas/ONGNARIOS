@@ -1,5 +1,6 @@
 package br.com.fiap.beans;
 
+//Classe Bean Vaga
 public class VagaBean {
 	private int cd_vaga;
 	private String nm_vaga;

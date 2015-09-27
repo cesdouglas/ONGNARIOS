@@ -1,5 +1,6 @@
 package br.com.fiap.beans;
 
+//Classe Bean Usuario
 public class UsuarioBean {
 	private String nr_cpf;
 	private String nm_usuario;

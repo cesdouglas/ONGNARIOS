@@ -72,7 +72,7 @@ public class ONGNARIOS extends HttpServlet {
 			//Setando empresa no bens
 			EmpresaBean e = bo.buscar(login);
 			
-			//Adiciona o atributo usuário na sessão
+			//Adiciona os atributos do usuário na sessão
 			session.setAttribute("cnpj", e.getNr_cnpj());
 			session.setAttribute("nome", e.getNm_empresa());
 			session.setAttribute("endereco", e.getDs_endereco());
@@ -157,6 +157,7 @@ public class ONGNARIOS extends HttpServlet {
 			v.setNr_vaga(Integer.parseInt(request.getParameter("nr_vaga")));
 			v.setDs_vaga(request.getParameter("descricao"));
 			v.setVl_salario(Double.parseDouble(request.getParameter("salario")));
+			//Recupera CNPJ da Sessao
 			HttpSession session = request.getSession();
 			v.setT_ONG_EMPRESA_nr_cnpj((String)session.getAttribute("cnpj"));
 			//Insere no bo e verifica
@@ -195,6 +196,7 @@ public class ONGNARIOS extends HttpServlet {
 	protected void inserirUsuario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
 		UsuarioBO ubo = new UsuarioBO();
 		try{
+			//Verificar se inseriu ou nao
 			if(ubo.inserir(request.getParameter("cpf"), request.getParameter("nome"), Integer.parseInt(request.getParameter("telefone")),
 					Integer.parseInt(request.getParameter("ddd")), request.getParameter("email"), request.getParameter("senha"))){
 				request.setAttribute("msg", "Usuário cadastrado com sucesso!");
@@ -213,13 +215,15 @@ public class ONGNARIOS extends HttpServlet {
 	protected void atualizarUsuario (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
 		UsuarioBO bo = new UsuarioBO();
 		try{
+			//Insere usuario no beans
 			UsuarioBean u = new UsuarioBean();
 			u.setNr_cpf(request.getParameter("cpf"));
 			u.setNm_usuario(request.getParameter("nome"));
 			u.setNr_telefone(Integer.parseInt(request.getParameter("telefone")));			
 			u.setNr_ddd(Integer.parseInt(request.getParameter("ddd")));
 			u.setDs_email(request.getParameter("email")); 
-			u.setDs_senha(request.getParameter("senha"));			
+			u.setDs_senha(request.getParameter("senha"));	
+			//Verifica se atualizou ou nao
 			if(bo.atualizar(u)>0){
 				request.setAttribute("msg", "Dados atualizados com sucesso");
 				request.getRequestDispatcher("index.jsp").forward(request, response);				
@@ -236,6 +240,7 @@ public class ONGNARIOS extends HttpServlet {
 	protected void atualizarEmpresa (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
 		EmpresaBO bo = new EmpresaBO();
 		try{
+			//Insere empresa no beans
 			EmpresaBean u = new EmpresaBean();
 			u.setNr_cnpj(request.getParameter("cnpj"));
 			u.setNm_empresa(request.getParameter("nome"));
@@ -243,7 +248,8 @@ public class ONGNARIOS extends HttpServlet {
 			u.setNr_ddd(Integer.parseInt(request.getParameter("ddd")));
 			u.setDs_endereco(request.getParameter("endereco"));
 			u.setDs_email(request.getParameter("email")); 
-			u.setDs_senha(request.getParameter("senha"));			
+			u.setDs_senha(request.getParameter("senha"));
+			//Verifica se atualizou ou nao
 			if(bo.atualizar(u)>0){
 				request.setAttribute("msg", "Dados atualizados com sucesso");
 				request.getRequestDispatcher("index.jsp").forward(request, response);				
@@ -260,14 +266,17 @@ public class ONGNARIOS extends HttpServlet {
 	protected void atualizarVaga (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
 		VagaBO bo = new VagaBO();
 		try{
+			//Insere vaga no beans
 			VagaBean v = new VagaBean();
 			v.setNm_vaga(request.getParameter("nome"));
 			v.setNr_vaga(Integer.parseInt(request.getParameter("nr_vaga")));
 			v.setDs_vaga(request.getParameter("descricao"));
 			v.setVl_salario(Double.parseDouble(request.getParameter("salario")));
+			//Recupera cnpj da session
 			HttpSession session = request.getSession();
 			v.setT_ONG_EMPRESA_nr_cnpj((String)session.getAttribute("cnpj"));
 			v.setCd_vaga(Integer.parseInt(request.getParameter("cd_vaga")));
+			//Verifica se atualizou ou nao
 			if(bo.atualizar(v)>0){
 				request.setAttribute("msg", "Dados atualizados com sucesso");
 				request.getRequestDispatcher("index.jsp").forward(request, response);				
@@ -285,7 +294,9 @@ public class ONGNARIOS extends HttpServlet {
 	protected void apagarVaga (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
 		VagaBO bo = new VagaBO();
 		try{
+			//Recupera id
 			int id = Integer.parseInt(request.getParameter("id"));
+			//Verifica se apagou ou nao
 			if(bo.deletar(id)>0){
 				request.setAttribute("msg", "Vaga apagada com sucesso");
 				request.getRequestDispatcher("perfil.jsp").forward(request, response);
@@ -303,12 +314,13 @@ public class ONGNARIOS extends HttpServlet {
 	protected void apagarEmpresa (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
 		EmpresaBO bo = new EmpresaBO();
 		try{
+			//Recupera CNPJ da session e verifica se apagou ou nao
 			HttpSession session = request.getSession();
 			if(bo.deletar((String)session.getAttribute("cnpj"))>0){
 				request.setAttribute("msg", "Dados apagados com sucesso");
 				logoutAmbos(request,response);
 			}else{
-				request.setAttribute("msg", "Ocorreu algum erro desconhecido");
+				request.setAttribute("msg", "Apague suas vagas cadastradas e tente novamente");
 				request.getRequestDispatcher("perfil.jsp").forward(request, response);	
 			}
 		}catch(Exception e){
@@ -319,6 +331,7 @@ public class ONGNARIOS extends HttpServlet {
 	//Inscrever na Vaga
 	protected void inscreverVaga (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
 		try{
+			//Recupera CPF da sessao e insere na Vaga
 			VagaBO bo = new VagaBO();
 			HttpSession session = request.getSession();
 			String cpf = (String)session.getAttribute("cpf");
@@ -333,6 +346,7 @@ public class ONGNARIOS extends HttpServlet {
 	//Desinscrever na Vaga
 	protected void desinscreverVaga (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
 		try{
+			//Insere null na Vaga
 			VagaBO bo = new VagaBO();
 			String cpf = null;
 			bo.insereCPF(cpf);
@@ -347,6 +361,7 @@ public class ONGNARIOS extends HttpServlet {
 	protected void apagarUsuario (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
 		UsuarioBO bo = new UsuarioBO();
 		try{
+			//Recupera cpf da session e verifica se apagou o usuario
 			HttpSession session = request.getSession();
 			if(bo.deletar((String)session.getAttribute("cpf"))>0){
 				request.setAttribute("msg", "Dados apagados com sucesso");
@@ -363,9 +378,12 @@ public class ONGNARIOS extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+	
+	//Metodos GET
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		try{
+			//verifica o value do name=form e executa a funcao desejada
 			if(request.getParameter("form").equals("buscarVaga")){
 				procurarVaga(request,response);
 			}
@@ -378,9 +396,11 @@ public class ONGNARIOS extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	//Metodos Post
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		try{
+			//verifica o value do name=form e executa a funcao desejada
 			if (request.getParameter("form").equals("insertEmpresa")){
 				inserirEmpresa(request,response);
 			}else if (request.getParameter("form").equals("insertUsuario")){

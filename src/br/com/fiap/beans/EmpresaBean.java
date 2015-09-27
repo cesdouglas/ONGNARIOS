@@ -1,5 +1,7 @@
 package br.com.fiap.beans;
 
+
+//Classe Bean Empresa
 public class EmpresaBean {
 	private String nr_cnpj;
 	private String nm_empresa;

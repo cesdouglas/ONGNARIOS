@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import br.com.fiap.beans.UsuarioBean;
 import br.com.fiap.conexao.ConexaoFactory;
 
+//Classe DAO para comunicação com o Banco de dados
 public class UsuarioDAO {
 	private Connection conexao;
 	
@@ -14,6 +15,7 @@ public class UsuarioDAO {
 		this.conexao = new ConexaoFactory().getConnection();		
 	}
 	
+	//Insere Usuario no banco de dados
 	public void insert(UsuarioBean e) throws Exception{
 		String sql = "INSERT INTO T_ONG_USUARIO " + "(nr_cpf, nm_usuario, nr_telefone, nr_ddd, ds_email, ds_senha) VALUES (?,?,?,?,?,?)";
 		PreparedStatement estrutura = conexao.prepareStatement(sql);
@@ -27,6 +29,7 @@ public class UsuarioDAO {
 		estrutura.close();
 	}
 	
+	//Procura Usuario no banco de dados pelo CPF
 	public UsuarioBean search(String cpf) throws Exception{
 		String sql = "SELECT * FROM T_ONG_USUARIO WHERE nr_cpf LIKE ?";
 		PreparedStatement estrutura = conexao.prepareStatement(sql);
@@ -45,6 +48,7 @@ public class UsuarioDAO {
 		return e;
 	}
 	
+	//Atualiza Usuario Banco de dados pelo CPF
 	public int update(UsuarioBean e) throws Exception{
 		PreparedStatement estrutura = this.conexao.prepareStatement("UPDATE T_ONG_USUARIO SET nm_usuario = ?, nr_telefone = ?, nr_ddd = ?, ds_email = ?, ds_senha = ? WHERE nr_cpf = ?");		
 		estrutura.setString(1, e.getNm_usuario());
@@ -58,6 +62,7 @@ public class UsuarioDAO {
 		return saida;
 	}
 
+	//Delete usuario do banco de dados pelo CPF
 	public int delete(String cpf) throws Exception{
 		PreparedStatement estrutura = this.conexao.prepareStatement("DELETE FROM T_ONG_USUARIO WHERE nr_cpf = ?");		
 		estrutura.setString(1, cpf);
@@ -66,6 +71,7 @@ public class UsuarioDAO {
 		return saida;
 	}
 	
+	//Verifica se a senha e o login são iguais aos digitados no front
 	public UsuarioBean login(String cpf, String senha) throws Exception{	
 		String sql = "SELECT * FROM T_ONG_USUARIO WHERE nr_cpf LIKE ? AND ds_senha = ?";
 		PreparedStatement estrutura = conexao.prepareStatement(sql);

@@ -5,6 +5,7 @@ import java.util.List;
 import br.com.fiap.beans.VagaBean;
 import br.com.fiap.dao.VagaDAO;
 
+//Classe BO que abrange as regras de negocio
 public class VagaBO {
 	private VagaDAO dao;
 	
@@ -12,10 +13,11 @@ public class VagaBO {
 		dao = new VagaDAO();
 	}
 	
+	//Verica se a vaga foi inserida
 	public boolean inserir(VagaBean e) throws Exception{
 		try{
-		dao.insert(e);
-		return true;
+			dao.insert(e);
+			return true;
 		}catch (Exception f) {
 			return false;
 		}
@@ -33,10 +35,11 @@ public class VagaBO {
 		return dao.all();
 	}
 	
-	public List<VagaBean> buscar(String nome) throws Exception{
+	public List<VagaBean> buscar(String nome) throws Exception{		
 		return dao.search(nome);
 	}
 	
+	//Insere CPF do usuario na Vaga e faz a verificacao
 	public boolean insereCPF(String cpf) throws Exception{
 		try{
 			dao.insertCPF(cpf);
