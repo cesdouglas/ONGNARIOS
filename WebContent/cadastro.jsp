@@ -48,13 +48,13 @@
                             
                             <section class="6u 12u$(narrower) 12u$(mobilep)">
                                 <div class="box highlight">
-                                      <i class="icon major fa-hand-peace-o"></a></i>  
+                                      <i class="icon major fa-hand-peace-o"></i>  
 							
                                 <h3>Seja um voluntário!</h3>
                                 <p> Cadastre-se! <br>
                                 Ajude a sua comunidade a crescer e se tornar um lugar melhor.<br>
                                 Juntos podemos mais!</p>
-                                
+                               </div>
 							</section>
                             <div id="buttons">
 							<h3>O que você é?</h3>
@@ -103,6 +103,7 @@
 											<ul class="actions">
                                                 <li><input type="submit" class="button alt" value="Cadastrar"/></li>
 											</ul>
+										</div>
 										</div>
 									</div>
                                  </form>
