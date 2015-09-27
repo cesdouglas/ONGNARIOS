@@ -10,7 +10,7 @@
 </head>
 <body>
 	<form action="midlet" method="post">
-		<input type="hidden" name="id" value="1">
+		<input type="hidden" name="id" value="insertEmpresa">
 		cnpj<input type="text" name="cnpj"><br>
 		nome<input type="text" name="nome"><br>
 		endereco<input type="text" name="endereco"><br>

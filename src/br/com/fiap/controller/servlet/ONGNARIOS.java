@@ -58,14 +58,14 @@ public class ONGNARIOS extends HttpServlet {
 		EmpresaBO ebo = new EmpresaBO();
 		try{
 
-			if(ebo.inserir(Integer.parseInt(request.getParameter("id")),request.getParameter("cnpj"), request.getParameter("nome"), request.getParameter("endereco"), Integer.parseInt(request.getParameter("telefone")),
-					Integer.parseInt(request.getParameter("ddd")), request.getParameter("email"), request.getParameter("senha"))){
-
+			if(ebo.inserir(request.getParameter("cnpj"), request.getParameter("nome"), request.getParameter("endereco"), Integer.parseInt(request.getParameter("telefone")),
+					Integer.parseInt(request.getParameter("ddd")), request.getParameter("email"), request.getParameter("senha")) == true){
 				request.setAttribute("msg", "Empresa cadastrada com sucesso!");
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}else{
+				System.out.println("Erro no inserirEmpresa");
 				request.setAttribute("msg", "Ocorreu um erro no cadastro!");
-				request.getRequestDispatcher("erro.jsp");
+				request.getRequestDispatcher("erro.jsp").forward(request, response);
 			}
 		}catch(Exception e){
 			throw new Excecao(e);
@@ -83,7 +83,7 @@ public class ONGNARIOS extends HttpServlet {
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}else{
 				request.setAttribute("msg", "Ocorreu um erro no cadastro!");
-				request.getRequestDispatcher("erro.jsp");
+				request.getRequestDispatcher("erro.jsp").forward(request,response);
 			}
 		}catch(Exception e){
 			throw new Excecao(e);
@@ -110,14 +110,15 @@ public class ONGNARIOS extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		try{
-			if (request.getParameter("id")=="1"){
+			if (request.getParameter("form").equals("insertEmpresa")){
 				inserirEmpresa(request,response);
-			}else if (request.getParameter("id")=="2"){
+			}else if (request.getParameter("form").equals("insertUsuario")){
 				inserirUsuario(request, response);
+			}else{
+				processarLoginUsuario(request,response);
 			}
-			processarLoginUsuario(request,response);
 		}catch(Exception e){
-			System.out.println(e);
+			response.sendRedirect("erro.jsp");
 		}
 	}
 

@@ -10,7 +10,7 @@ public class EmpresaBO {
 		dao = new EmpresaDAO();
 	}
 	
-	public boolean inserir(int id, String cnpj, String nome, String endereco, int telefone, int ddd, String email, String senha) throws Exception{
+	public boolean inserir(String cnpj, String nome, String endereco, int telefone, int ddd, String email, String senha) throws Exception{
 		EmpresaBean e = new EmpresaBean(cnpj, nome, endereco, telefone, ddd, email, senha);
 		if(dao.insert(e)){
 			return true;
