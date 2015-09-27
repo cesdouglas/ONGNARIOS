@@ -4,7 +4,7 @@
 <%@ include file="cabecalho.jsp" %>
 			<nav id="nav">
 				<ul>
-					<li class="current"><a href="index.jsp">Home</a></li>
+					<li><a href="index.jsp">Home</a></li>
 					<li><a href="parceiros.jsp">Parceiros</a></li>
 					<li><a href="perfil.jsp">Perfil</a></li>
 					<li><a href="vagas.jsp">Vagas</a></li>

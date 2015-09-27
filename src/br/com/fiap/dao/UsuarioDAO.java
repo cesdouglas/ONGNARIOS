@@ -28,7 +28,7 @@ public class UsuarioDAO {
 	}
 	
 	public UsuarioBean search(String cpf) throws Exception{
-		String sql = "SELECT * FROM T_ONG_USUARIO WHERE nr_cnpj LIKE ?";
+		String sql = "SELECT * FROM T_ONG_USUARIO WHERE nr_cpf LIKE ?";
 		PreparedStatement estrutura = conexao.prepareStatement(sql);
 		estrutura.setString(1, cpf);
 		ResultSet resultado = estrutura.executeQuery();

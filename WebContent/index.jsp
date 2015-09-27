@@ -61,7 +61,7 @@
 						</h3>
 						<p>O grupo Palhaços da alegria busca voluntários para atuar
 							nos hospitáis de São Paulo. Faça a diferença.</p>
-						<a href="vagas.html" class="button">Inscreva-se</a>
+						<a href="vagas.jsp" class="button">Inscreva-se</a>
 					</div>
 				</section>
 			</div>

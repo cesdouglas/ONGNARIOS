@@ -10,8 +10,13 @@ public class VagaBO {
 		dao = new VagaDAO();
 	}
 	
-	public void inserir(VagaBean e) throws Exception{
+	public boolean inserir(VagaBean e) throws Exception{
+		try{
 		dao.insert(e);
+		return true;
+		}catch (Exception f) {
+			return false;
+		}
 	}
 	
 	public VagaBean buscar(String cd_vaga) throws Exception{

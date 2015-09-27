@@ -78,7 +78,7 @@ public class EmpresaDAO {
 	
 	//Verifica login
 	public EmpresaBean login(String cnpj, String senha) throws Exception{	
-		String sql = "SELECT * FROM T_ONG_USUARIO WHERE nr_cnpj LIKE ? AND ds_senha = ?";
+		String sql = "SELECT * FROM T_ONG_EMPRESA WHERE nr_cnpj LIKE ? AND ds_senha = ?";
 		PreparedStatement estrutura = conexao.prepareStatement(sql);
 		estrutura.setString(1, cnpj);
 		estrutura.setString(2, senha);

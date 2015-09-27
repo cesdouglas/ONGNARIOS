@@ -11,8 +11,10 @@ import javax.servlet.http.HttpSession;
 
 import br.com.fiap.beans.EmpresaBean;
 import br.com.fiap.beans.UsuarioBean;
+import br.com.fiap.beans.VagaBean;
 import br.com.fiap.bo.EmpresaBO;
 import br.com.fiap.bo.UsuarioBO;
+import br.com.fiap.bo.VagaBO;
 import br.com.fiap.excecoes.Excecao;
 
 /**
@@ -29,7 +31,8 @@ public class ONGNARIOS extends HttpServlet {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
+	
+	//Login Usuario
 	protected void loginUsuario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
 		//Recupera a sessão do usuário ou cria uma nova se não existe
 		String login = request.getParameter("cpf");
@@ -37,17 +40,11 @@ public class ONGNARIOS extends HttpServlet {
 		UsuarioBO bo = new UsuarioBO();
 		if(bo.entrar(login, senha)){
 			HttpSession session = request.getSession();
-			//Instancia o UsuarioBean
-			UsuarioBean u = new UsuarioBean();
-			//Setando dados no bean
-			u.setNr_cpf(request.getParameter("cpf"));
-			u.setNm_usuario(request.getParameter("nome"));
-			u.setNr_telefone(Integer.parseInt(request.getParameter("telefone")));
-			u.setNr_ddd(Integer.parseInt(request.getParameter("ddd")));
-			u.setDs_email(request.getParameter("email"));
-			u.setDs_senha(request.getParameter("senha"));
 			
-			//Adiciona o atributo usuário na sessão
+			//Setando usuario no bens
+			UsuarioBean u = bo.buscar(login);
+			
+			//Adiciona o usuário na sessão
 			session.setAttribute("cpf", u.getNr_cpf());
 			session.setAttribute("nome", u.getNm_usuario());
 			session.setAttribute("telefone", u.getNr_telefone());
@@ -56,35 +53,27 @@ public class ONGNARIOS extends HttpServlet {
 			session.setAttribute("senha", u.getDs_senha());
 			session.setAttribute("logado", "sim");
 			request.setAttribute("msg", "Logado com sucesso!");
-			request.getRequestDispatcher("vaga.jsp").forward(request, response);
+			request.getRequestDispatcher("vagas.jsp").forward(request, response);
 		}else{
 			request.setAttribute("msg", "CPF ou Senha errada!");
-			request.getRequestDispatcher("testeLogin.jsp").forward(request, response);
+			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}
 	}
 	
-	
+	//Login Empresa
 	protected void loginEmpresa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
 		//Recupera a sessão da empresa ou cria uma nova se não existe
 		String login = request.getParameter("cnpj");
 		String senha = request.getParameter("senha"); 
-		EmpresaBO ebo = new EmpresaBO();
-		if(ebo.entrar(login, senha)){
+		EmpresaBO bo = new EmpresaBO();
+		if(bo.entrar(login, senha)){
 			HttpSession session = request.getSession();
-			//Instancia o EmpresaBean
-			EmpresaBean e = new EmpresaBean();
 			
-			//Setando dados no bean
-			e.setNr_cnpj(request.getParameter("cpf"));
-			e.setNm_empresa(request.getParameter("nome"));
-			e.setDs_endereco(request.getParameter("endereco"));
-			e.setNr_telefone(Integer.parseInt(request.getParameter("telefone")));
-			e.setNr_ddd(Integer.parseInt(request.getParameter("ddd")));
-			e.setDs_email(request.getParameter("email"));
-			e.setDs_senha(request.getParameter("senha"));
+			//Setando empresa no bens
+			EmpresaBean e = bo.buscar(login);
 			
 			//Adiciona o atributo usuário na sessão
-			session.setAttribute("cpf", e.getNr_cnpj());
+			session.setAttribute("cnpj", e.getNr_cnpj());
 			session.setAttribute("nome", e.getNm_empresa());
 			session.setAttribute("endereco", e.getDs_endereco());
 			session.setAttribute("telefone", e.getNr_telefone());
@@ -93,10 +82,10 @@ public class ONGNARIOS extends HttpServlet {
 			session.setAttribute("senha", e.getDs_senha());
 			session.setAttribute("logado", "sim");
 			request.setAttribute("msg", "Logado com sucesso!");
-			request.getRequestDispatcher("vaga.jsp").forward(request, response);
+			request.getRequestDispatcher("vagas.jsp").forward(request, response);
 		}else{
 			request.setAttribute("msg", "CNPJ ou Senha errada!");
-			request.getRequestDispatcher("testeLogin.jsp").forward(request, response);
+			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}
 	}
 	
@@ -104,6 +93,7 @@ public class ONGNARIOS extends HttpServlet {
 	protected void logoutAmbos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
 		HttpSession session = request.getSession();
 		session.invalidate();
+		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 	
 	//Valida o login de ambos
@@ -116,6 +106,29 @@ public class ONGNARIOS extends HttpServlet {
 			return false;
 		}
 	}
+	
+	//Insere Vaga
+	protected void inserirVaga(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
+		VagaBO bo = new VagaBO();
+		try{
+			VagaBean v = new VagaBean();
+			v.setNm_vaga(request.getParameter("nome"));
+			v.setNr_vaga(Integer.parseInt(request.getParameter("nr_vaga")));
+			v.setDs_vaga(request.getParameter("descricao"));
+			v.setVl_salario(Double.parseDouble(request.getParameter("salario")));
+			HttpSession session = request.getSession();
+			v.setT_ONG_EMPRESA_nr_cnpj((String)session.getAttribute("cnpj"));
+			if(bo.inserir(v) == true){
+				request.setAttribute("msg", "Vaga cadastrada com sucesso!");
+				request.getRequestDispatcher("index.jsp").forward(request, response);
+			}else{
+				request.setAttribute("msg", "Ocorreu um erro no cadastro!");
+				request.getRequestDispatcher("erro.jsp").forward(request, response);
+			}
+		}catch(Exception e){
+			throw new Excecao(e);
+		}
+	}
 
 	//Insert Empresa
 	protected void inserirEmpresa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
@@ -126,7 +139,6 @@ public class ONGNARIOS extends HttpServlet {
 				request.setAttribute("msg", "Empresa cadastrada com sucesso!");
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}else{
-				System.out.println("Erro no inserirEmpresa");
 				request.setAttribute("msg", "Ocorreu um erro no cadastro!");
 				request.getRequestDispatcher("erro.jsp").forward(request, response);
 			}
@@ -154,16 +166,83 @@ public class ONGNARIOS extends HttpServlet {
 
 
 
-//	protected int atualizarUsuario (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
-//		UsuarioBO ubo = new UsuarioBO();
-//		try{
-//			if(ubo.atualizar((request.getParameter("cpf"), request.getParameter("nome"), Integer.parseInt(request.getParameter("telefone")),
-//					Integer.parseInt(request.getParameter("ddd")), request.getParameter("email"), request.getParameter("senha")));))
-//
-//			request.setAttribute("msg", "Dados atualizados com sucesso");
-//			request.getRequestDispatcher("testeUpdateUsuario.jsp").forward(request, response);
-//		}
-//	}
+	protected void atualizarUsuario (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
+		UsuarioBO bo = new UsuarioBO();
+		try{
+			UsuarioBean u = new UsuarioBean();
+			u.setNr_cpf(request.getParameter("cpf"));
+			u.setNm_usuario(request.getParameter("nome"));
+			u.setNr_telefone(Integer.parseInt(request.getParameter("telefone")));			
+			u.setNr_ddd(Integer.parseInt(request.getParameter("ddd")));
+			u.setDs_email(request.getParameter("email")); 
+			u.setDs_senha(request.getParameter("senha"));			
+			if(bo.atualizar(u)>0){
+				request.setAttribute("msg", "Dados atualizados com sucesso");
+				request.getRequestDispatcher("index.jsp").forward(request, response);				
+			}else{
+				request.setAttribute("msg", "Ocorreu algum erro, verifique os campos");
+				request.getRequestDispatcher("perfil.jsp").forward(request, response);	
+			}
+		}catch(Exception e){
+			throw new Excecao(e);
+		}
+	}
+	
+	protected void atualizarEmpresa (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
+		EmpresaBO bo = new EmpresaBO();
+		try{
+			EmpresaBean u = new EmpresaBean();
+			u.setNr_cnpj(request.getParameter("cnpj"));
+			u.setNm_empresa(request.getParameter("nome"));
+			u.setNr_telefone(Integer.parseInt(request.getParameter("telefone")));			
+			u.setNr_ddd(Integer.parseInt(request.getParameter("ddd")));
+			u.setDs_endereco(request.getParameter("endereco"));
+			u.setDs_email(request.getParameter("email")); 
+			u.setDs_senha(request.getParameter("senha"));			
+			if(bo.atualizar(u)>0){
+				request.setAttribute("msg", "Dados atualizados com sucesso");
+				request.getRequestDispatcher("index.jsp").forward(request, response);				
+			}else{
+				request.setAttribute("msg", "Ocorreu algum erro, verifique os campos");
+				request.getRequestDispatcher("perfil.jsp").forward(request, response);	
+			}
+		}catch(Exception e){
+			throw new Excecao(e);
+		}
+	}
+	
+	protected void apagarEmpresa (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
+		EmpresaBO bo = new EmpresaBO();
+		try{
+			HttpSession session = request.getSession();
+			System.out.println("teste");
+			if(bo.deletar((String)session.getAttribute("cnpj"))>0){
+				request.setAttribute("msg", "Dados apagados com sucesso");
+				logoutAmbos(request,response);
+			}else{
+				request.setAttribute("msg", "Ocorreu algum erro desconhecido");
+				request.getRequestDispatcher("perfil.jsp").forward(request, response);	
+			}
+		}catch(Exception e){
+			throw new Excecao(e);
+		}
+	}
+	
+	protected void apagarUsuario (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
+		UsuarioBO bo = new UsuarioBO();
+		try{
+			HttpSession session = request.getSession();
+			if(bo.deletar((String)session.getAttribute("cpf"))>0){
+				request.setAttribute("msg", "Dados apagados com sucesso");
+				logoutAmbos(request,response);
+			}else{
+				request.setAttribute("msg", "Ocorreu algum erro desconhecido");
+				request.getRequestDispatcher("perfil.jsp").forward(request, response);	
+			}
+		}catch(Exception e){
+			throw new Excecao(e);
+		}
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -184,9 +263,22 @@ public class ONGNARIOS extends HttpServlet {
 				inserirEmpresa(request,response);
 			}else if (request.getParameter("form").equals("insertUsuario")){
 				inserirUsuario(request, response);
-			}
-			else if (request.getParameter("form").equals("login")){
+			}else if (request.getParameter("form").equals("insertVaga")){
+				inserirVaga(request, response);
+			}else if (request.getParameter("form").equals("loginUsuario")){
 				loginUsuario(request,response);
+			}else if (request.getParameter("form").equals("loginEmpresa")){
+				loginEmpresa(request,response);
+			}else if(request.getParameter("form").equals("logout")){
+				logoutAmbos(request,response);
+			}else if(request.getParameter("form").equals("atualizarUsuario")){
+				atualizarUsuario(request,response);
+			}else if(request.getParameter("form").equals("atualizarEmpresa")){
+				atualizarEmpresa(request,response);
+			}else if(request.getParameter("form").equals("apagarEmpresa")){
+				apagarEmpresa(request,response);
+			}else if(request.getParameter("form").equals("apagarUsuario")){
+				apagarUsuario(request,response);
 			}
 		}catch(Exception e){
 			response.sendRedirect("erro.jsp");

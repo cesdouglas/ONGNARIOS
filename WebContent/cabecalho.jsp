@@ -17,17 +17,27 @@
 <body>
 	<div id="page-wrapper">
 		<!-- Login -->
-		<c:if test="${empty logado}">
+		<% String logado = (String)session.getAttribute("logado"); 
+		 	application.setAttribute("teste", logado); 
+		 	String empresa = (String)session.getAttribute("cnpj"); 
+		 	application.setAttribute("teste2", empresa);
+		 	%>
+		<c:if test="${!empty teste2}">
+			<div id="button_log">
+				<a href="cadastro_vaga.jsp" class="button" style="right: 300px; top: 44px; position: absolute;">Cadastrar Vaga</a>
+			</div>
+		</c:if>
+		<c:if test="${empty teste}">
 			<div id="button_log">
 				<a href="login.jsp" class="button" style="right: 50px; top: 44px; position: absolute;">Login</a>
 			</div>
 		</c:if>
 		<!-- Logout -->
-		<c:if test="${logado == 'true'}">
+		<c:if test="${logado == 'sim'}">
 			<div id="button_log">
 				<form action="midlet" method="post">
 					<input type="hidden" name="form" value="logout">		
-					<input type="submit" value="Logout" style="background: red" style="right: 50px; top: 44px; position: absolute;">							
+					<input type="submit" value="Logout" style="background: red; right: 50px; top: 44px; position: absolute;">							
 				</form>
 			</div>
 		</c:if>
@@ -38,7 +48,7 @@
 
 			<!-- Logo -->
 			<h1>
-				<a href="index.html" id="logo">ONG<em>nários</em></a>
+				<a href="index.jsp" id="logo">ONG<em>nários</em></a>
 			</h1>
 
 

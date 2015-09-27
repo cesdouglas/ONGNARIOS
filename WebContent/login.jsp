@@ -7,8 +7,7 @@
 								<li><a href="parceiros.jsp">Parceiros</a></li>
                                 <li><a href="perfil.jsp">Perfil</a></li>
 								<li><a href="vagas.jsp">Vagas</a></li>
-                                <li><a href="cadastro.jsp">Cadastre-se</a></li> 
-                                
+                                <li><a href="cadastro.jsp">Cadastre-se</a></li>                                 
 							</ul>
 						</nav>
 				</div>
@@ -29,7 +28,7 @@
 	                            <div class="3u 6u(mobilep)">
 									<input type="text" name="senha" id="senha" placeholder="Senha" maxlength="12" required="required" style="margin-top: 10px"/>
 	                            </div>
-	                   	        <input type="hidden" name="form" value="logarEmpresa">
+	                   	        <input type="hidden" name="form" value="loginEmpresa">
 	                           	<div class="row 50%">
 									<div class="12u">
 										<ul class="actions">
@@ -50,7 +49,7 @@
 	                            <div class="3u 6u(mobilep)">
 									<input type="text" name="senha" id="senha" placeholder="Senha" maxlength="12" required="required" style="margin-top: 10px"/>
 	                            </div>
-	                   	        <input type="hidden" name="form" value="logarUsuario">
+	                   	        <input type="hidden" name="form" value="loginUsuario">
 	                           	<div class="row 50%">
 									<div class="12u">
 										<ul class="actions">
