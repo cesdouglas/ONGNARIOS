@@ -15,6 +15,11 @@
 
 </head>
 <body>
+<center><h4>${msg}</h4></center>
+				<% 
+				   String nome = (String)session.getAttribute("nome"); 
+				   application.setAttribute("nome_usuario", nome); 
+			 	%>
 	<div id="page-wrapper">
 		<!-- Login -->
 		<% String logado = (String)session.getAttribute("logado"); 
@@ -22,6 +27,9 @@
 		 	String empresa = (String)session.getAttribute("cnpj"); 
 		 	application.setAttribute("teste2", empresa);
 		 	%>
+			 	<c:if test="${!empty nome_usuario}">
+			 		<div style="position: absolute; right: 170px; top: 12px;"><p>Olá ${nome_usuario}!</p></div>
+			 	</c:if>
 		<c:if test="${!empty teste2}">
 			<div id="button_log">
 				<a href="cadastro_vaga.jsp" class="button" style="right: 300px; top: 44px; position: absolute;">Cadastrar Vaga</a>

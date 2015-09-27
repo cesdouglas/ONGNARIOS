@@ -13,13 +13,30 @@
 						</nav>
 				</div>
 			           
+	           	<% 
+				   String teste = (String)session.getAttribute("cpf"); 
+				   application.setAttribute("a", teste); 
+			 	%>
+			           
+			           
          <!-- Uma mudança gigantesca -->
 				<section class="wrapper style2">
 					<div class="container">
 						<header class="major">
+						<form action="midlet" method="get">
+							<input type="search" name="search" required="required" placeholder="Buscar Vaga">
+							<input type="hidden" name="form" value="buscarVaga">
+							<input type="submit" value="buscar" >						
+						</form>
 							<h2>Seja a mudança que você quer ver no mundo.</h2>
 							<p>Ser feliz é fazer as pessoas felizes.</p>
 						</header>
+						<center>
+						<form action="midlet" method="post">
+							<input type="hidden" name="form" value="carregarVagas">
+							<input type="submit" value="Ver todas as vagas" style="background-color: green">							
+						</form>
+						</center>
 					</div>
 				</section>
 
@@ -28,57 +45,41 @@
 					<div class="container">
 						<div class="row">
                             
+                            <c:forEach var="n" items="${vagas}">
                             
 							<section class="6u 12u(narrower)">
 								<div class="box post">
 									<a href="#" class="image left"><img src="images/logo-adoteumgatinho.jpg" alt="" /></a>
 									<div class="inner">
-										<h3>Cuidador de Animais</h3>
-										<p>Procura-se voluntários para ajudar a cuidar dos nossos felinos, 
-                                            entre as atividades então: dar banho, escovar, colocar comida, limpar caixa de areia.<br>
-                                            Disponibilidade necessária: Uma vez por semana.</p>
-                                        <a href="vagas.jsp" class="button">Inscreva-se</a>
+										<h3>${n.nm_vaga}</h3>
+										<p>Número de vagas: ${n.nr_vaga}<br>
+											Descrição: ${n.ds_vaga}<br>
+											Salário: ${n.vl_salario}<br>
+											CNPJ: ${n.t_ONG_EMPRESA_nr_cnpj}
+										</p>
+										<c:if test="${empty n.t_ONG_USUARIO_nr_cpf}">
+	                                        <form action="midlet" method="post">
+	                                        	<input type="hidden"name ="form" value="inscrever">
+	                                        	<input type="submit" style="background-color: #37c0fb" value="Inscreva-se">
+	                                        </form>
+                                        </c:if>
+										<c:if test="${a == n.t_ONG_USUARIO_nr_cpf}">
+		                                        <form action="midlet" method="post">
+		                                        	<input type="hidden" name ="form" value="desinscrever">
+		                                        	<input type="submit" style="background-color: red" value="Desinscrever-se">
+		                                        </form>
+                                        </c:if>
+                                        <c:if test="${!empty n.t_ONG_USUARIO_nr_cpf && a != n.t_ONG_USUARIO_nr_cpf}">
+         	                                <form action="midlet" method="post">
+	                                        	<input type="hidden"name ="form" value="inscrever">
+	                                        	<input type="submit" style="background-color: #37c0fb" value="Inscreva-se">
+	                                        </form>
+                                        </c:if>
 									</div>
 								</div>
-							</section>
-                            
-                            
-							<section class="6u 12u(narrower)">
-								<div class="box post">
-									<a href="#" class="image left"><img src="images/preview-Funda%C3%A7%C3%A3o_Roberto_Marinho_Rede_Globo.png" alt="" /></a>
-									<div class="inner">
-										<h3>Instrutor de Informática</h3>
-										<p>Precisamos de pessoas para curso com duração de 3 sábados.
-                                        <br> Sisponibilidade necessária: 3 sábados.</p>
-                                        <a href="vagas.jsp" class="button">Inscreva-se</a>
-									</div>
-								</div>
-							</section>
-						</div>
-						<div class="row">
-							<section class="6u 12u(narrower)">
-								<div class="box post">
-									<a href="#" class="image left"><img src="images/347.jpg" alt="" /></a>
-									<div class="inner">
-										<h3>Ajudante</h3>
-										<p>Precisamos de pessoas para fazer a divulgação do Green Peace na capital.<br>
-                                        Disponibilidade necessária: qualquer dia.</p>
-                                        <a href="vagas.jsp" class="button">Inscreva-se</a>
-									</div>
-								</div>
-							</section>
-							<section class="6u 12u(narrower)">
-								<div class="box post">
-									<a href="#" class="image left"><img src="images/Rotaract_color_regular.jpg" alt="" /></a>
-									<div class="inner">
-										<h3>Procuramos Membros</h3>
-										<p>A Rotaract procura membros para o clube, caso goste de trabalho social, 
-                                            ejá pró-ativo e tenha vontade de conhecer gente nova, esse é o seu lugar!
-                                            <br> Disponibilidade necessária: Dois dias no mês.</p>
-                                        <a href="vagas.jsp" class="button">Inscreva-se</a>
-									</div>
-								</div>
-							</section>
+							</section>                            
+                            </c:forEach>
+							
 						</div>
 					</div>
 				</section>

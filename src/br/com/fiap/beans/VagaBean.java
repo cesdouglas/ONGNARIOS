@@ -18,8 +18,8 @@ public class VagaBean {
 		this.nr_vaga = nr_vaga;
 		this.ds_vaga = ds_vaga;
 		this.vl_salario = vl_salario;
-		T_ONG_USUARIO_nr_cpf = t_ONG_USUARIO_nr_cpf;
-		T_ONG_EMPRESA_nr_cnpj = t_ONG_EMPRESA_nr_cnpj;
+		this.T_ONG_USUARIO_nr_cpf = t_ONG_USUARIO_nr_cpf;
+		this.T_ONG_EMPRESA_nr_cnpj = t_ONG_EMPRESA_nr_cnpj;
 	}
 
 	public VagaBean() {
@@ -70,16 +70,16 @@ public class VagaBean {
 		return T_ONG_USUARIO_nr_cpf;
 	}
 
-	public void setT_ONG_USUARIO_nr_cpf(String t_ONG_USUARIO_nr_cpf) {
-		T_ONG_USUARIO_nr_cpf = t_ONG_USUARIO_nr_cpf;
+	public void setT_ONG_USUARIO_nr_cpf(String T_ONG_USUARIO_nr_cpf) {
+		this.T_ONG_USUARIO_nr_cpf = T_ONG_USUARIO_nr_cpf;
 	}
 
 	public String getT_ONG_EMPRESA_nr_cnpj() {
 		return T_ONG_EMPRESA_nr_cnpj;
 	}
 
-	public void setT_ONG_EMPRESA_nr_cnpj(String t_ONG_EMPRESA_nr_cnpj) {
-		T_ONG_EMPRESA_nr_cnpj = t_ONG_EMPRESA_nr_cnpj;
+	public void setT_ONG_EMPRESA_nr_cnpj(String T_ONG_EMPRESA_nr_cnpj) {
+		this.T_ONG_EMPRESA_nr_cnpj = T_ONG_EMPRESA_nr_cnpj;
 	}	
 	
 }

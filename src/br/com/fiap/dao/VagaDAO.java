@@ -3,6 +3,8 @@ package br.com.fiap.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import br.com.fiap.beans.VagaBean;
 import br.com.fiap.conexao.ConexaoFactory;
@@ -27,23 +29,26 @@ public class VagaDAO {
 		estrutura.close();
 	}
 	
-	public VagaBean search(String cd_vaga) throws Exception{
-		String sql = "SELECT * FROM T_ONG_VAGA WHERE cd_vaga LIKE ?";
+	public List<VagaBean> search(String nome) throws Exception{
+		String sql = "SELECT * FROM T_ONG_VAGA WHERE nm_vaga LIKE ?";
 		PreparedStatement estrutura = conexao.prepareStatement(sql);
-		estrutura.setString(1, cd_vaga);
+		estrutura.setString(1, nome);
 		ResultSet resultado = estrutura.executeQuery();
-		resultado.next();
-		VagaBean e = new VagaBean();
-		e.setCd_vaga(Integer.parseInt(resultado.getString("cd_vaga")));	
-		e.setNm_vaga(resultado.getString("nm_vaga"));
-		e.setNr_vaga(Integer.parseInt(resultado.getString("nr_vaga")));
-		e.setDs_vaga(resultado.getString("ds_vaga"));
-		e.setVl_salario(Double.parseDouble(resultado.getString("vl_salario")));
-		e.setT_ONG_USUARIO_nr_cpf(resultado.getString("T_ONG_USUARIO_nr_cpf"));
-		e.setT_ONG_EMPRESA_nr_cnpj(resultado.getString("T_ONG_EMPRESA_nr_cnpj"));
+		List<VagaBean> lista = new ArrayList<VagaBean>();
+		while(resultado.next()){
+			VagaBean e = new VagaBean();
+			e.setCd_vaga(Integer.parseInt(resultado.getString("cd_vaga")));	
+			e.setNm_vaga(resultado.getString("nm_vaga"));
+			e.setNr_vaga(Integer.parseInt(resultado.getString("nr_vaga")));
+			e.setDs_vaga(resultado.getString("ds_vaga"));
+			e.setVl_salario(Double.parseDouble(resultado.getString("vl_salario")));
+			e.setT_ONG_USUARIO_nr_cpf(resultado.getString("T_ONG_USUARIO_nr_cpf"));
+			e.setT_ONG_EMPRESA_nr_cnpj(resultado.getString("T_ONG_EMPRESA_nr_cnpj"));
+			lista.add(e);
+		}
 		resultado.close();
 		estrutura.close();
-		return e;
+		return lista;
 	}
 	
 	public int update(VagaBean e) throws Exception{
@@ -67,4 +72,34 @@ public class VagaDAO {
 		estrutura.close();
 		return saida;
 	}
+	
+	public List<VagaBean> all() throws Exception{
+		String sql = "SELECT * FROM T_ONG_VAGA";
+		PreparedStatement estrutura = conexao.prepareStatement(sql);
+		ResultSet resultado = estrutura.executeQuery();
+		List<VagaBean> lista = new ArrayList<VagaBean>();
+		while(resultado.next()){
+			VagaBean e = new VagaBean();
+			e.setCd_vaga(Integer.parseInt(resultado.getString("cd_vaga")));	
+			e.setNm_vaga(resultado.getString("nm_vaga"));
+			e.setNr_vaga(Integer.parseInt(resultado.getString("nr_vaga")));
+			e.setDs_vaga(resultado.getString("ds_vaga"));
+			e.setVl_salario(Double.parseDouble(resultado.getString("vl_salario")));
+			e.setT_ONG_USUARIO_nr_cpf(resultado.getString("T_ONG_USUARIO_nr_cpf"));
+			e.setT_ONG_EMPRESA_nr_cnpj(resultado.getString("T_ONG_EMPRESA_nr_cnpj"));
+			lista.add(e);
+		}
+		resultado.close();
+		estrutura.close();
+		return lista;
+	}
+	
+	public void insertCPF(String cpf) throws Exception{
+		String sql = "UPDATE T_ONG_VAGA SET T_ONG_USUARIO_nr_cpf = ?";
+		PreparedStatement estrutura = conexao.prepareStatement(sql);
+		estrutura.setString(1, cpf);
+		estrutura.execute();
+		estrutura.close();
+	}
+	
 }

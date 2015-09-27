@@ -41,7 +41,7 @@ public class ONGNARIOS extends HttpServlet {
 		if(bo.entrar(login, senha)){
 			HttpSession session = request.getSession();
 			
-			//Setando usuario no bens
+			//Setando usuario no beans
 			UsuarioBean u = bo.buscar(login);
 			
 			//Adiciona o usuário na sessão
@@ -93,6 +93,7 @@ public class ONGNARIOS extends HttpServlet {
 	protected void logoutAmbos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
 		HttpSession session = request.getSession();
 		session.invalidate();
+		request.setAttribute("msg", "Logout com sucesso!");
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 	
@@ -106,6 +107,30 @@ public class ONGNARIOS extends HttpServlet {
 			return false;
 		}
 	}
+	
+	//Carregar vagas
+	protected void carregarVagas(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
+		try{
+			VagaBO bo = new VagaBO();		
+			request.setAttribute("vagas", bo.carregarTodas());
+			request.getRequestDispatcher("vagas.jsp").forward(request, response);
+		}catch(Exception e){
+			throw new Excecao(e);
+		}
+	}
+	
+	//Buscar Vaga
+	protected void procurarVaga(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
+		try{
+			VagaBO bo = new VagaBO();
+			String nome = request.getParameter("search");
+			request.setAttribute("vagas", bo.buscar(nome));
+			request.getRequestDispatcher("resultado.jsp").forward(request, response);
+		}catch(Exception e){
+			throw new Excecao(e);
+		}
+	}
+	
 	
 	//Insere Vaga
 	protected void inserirVaga(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
@@ -165,7 +190,7 @@ public class ONGNARIOS extends HttpServlet {
 	}
 
 
-
+	//Atualizar dados Usuario
 	protected void atualizarUsuario (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
 		UsuarioBO bo = new UsuarioBO();
 		try{
@@ -188,6 +213,7 @@ public class ONGNARIOS extends HttpServlet {
 		}
 	}
 	
+	//Atualizar dados Empresa
 	protected void atualizarEmpresa (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
 		EmpresaBO bo = new EmpresaBO();
 		try{
@@ -211,6 +237,7 @@ public class ONGNARIOS extends HttpServlet {
 		}
 	}
 	
+	//Apagar dados Empresa
 	protected void apagarEmpresa (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
 		EmpresaBO bo = new EmpresaBO();
 		try{
@@ -228,6 +255,34 @@ public class ONGNARIOS extends HttpServlet {
 		}
 	}
 	
+	//Inscrever na Vaga
+	protected void inscreverVaga (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
+		try{
+			VagaBO bo = new VagaBO();
+			HttpSession session = request.getSession();
+			String cpf = (String)session.getAttribute("cpf");
+			bo.insereCPF(cpf);
+			request.getRequestDispatcher("vagas.jsp").forward(request, response);
+		}catch(Exception e){
+			throw new Excecao(e);
+		}
+		
+	}
+	
+	//Desinscrever na Vaga
+	protected void desinscreverVaga (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
+		try{
+			VagaBO bo = new VagaBO();
+			String cpf = null;
+			bo.insereCPF(cpf);
+			request.getRequestDispatcher("vagas.jsp").forward(request, response);
+		}catch(Exception e){
+			throw new Excecao(e);
+		}
+		
+	}
+	
+	//Apagar Usuario
 	protected void apagarUsuario (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
 		UsuarioBO bo = new UsuarioBO();
 		try{
@@ -249,7 +304,13 @@ public class ONGNARIOS extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
+		try{
+			if(request.getParameter("form").equals("buscarVaga")){
+				procurarVaga(request,response);
+			}
+		}catch(Exception e){
+			response.sendRedirect("resultado.jsp");
+		}
 
 	}
 
@@ -279,6 +340,14 @@ public class ONGNARIOS extends HttpServlet {
 				apagarEmpresa(request,response);
 			}else if(request.getParameter("form").equals("apagarUsuario")){
 				apagarUsuario(request,response);
+			}else if(request.getParameter("form").equals("carregarVagas")){
+				carregarVagas(request,response);
+			}else if(request.getParameter("form").equals("inscrever")){
+				inscreverVaga(request,response);
+			}else if(request.getParameter("form").equals("desinscrever")){
+				desinscreverVaga(request,response);
+			}else if(request.getParameter("form").equals("buscarVaga")){
+				procurarVaga(request,response);
 			}
 		}catch(Exception e){
 			response.sendRedirect("erro.jsp");

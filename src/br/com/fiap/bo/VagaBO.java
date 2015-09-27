@@ -1,5 +1,7 @@
 package br.com.fiap.bo;
 
+import java.util.List;
+
 import br.com.fiap.beans.VagaBean;
 import br.com.fiap.dao.VagaDAO;
 
@@ -19,15 +21,28 @@ public class VagaBO {
 		}
 	}
 	
-	public VagaBean buscar(String cd_vaga) throws Exception{
-		return dao.search(cd_vaga);
-	}
-	
 	public int atualizar(VagaBean e) throws Exception{
 		return dao.update(e);
 	}
 	
 	public int deletar(String cd_vaga) throws Exception{
 		return dao.delete(cd_vaga);
+	}
+	
+	public List<VagaBean> carregarTodas() throws Exception{
+		return dao.all();
+	}
+	
+	public List<VagaBean> buscar(String nome) throws Exception{
+		return dao.search(nome);
+	}
+	
+	public boolean insereCPF(String cpf) throws Exception{
+		try{
+			dao.insertCPF(cpf);
+			return true;
+		}catch (Exception f) {
+			return false;
+		}		
 	}
 }
