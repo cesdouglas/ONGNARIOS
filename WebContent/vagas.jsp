@@ -32,10 +32,10 @@
 							<p>Ser feliz é fazer as pessoas felizes.</p>
 						</header>
 						<center>
-						<form action="midlet" method="post">
-							<input type="hidden" name="form" value="carregarVagas">
-							<input type="submit" value="Ver todas as vagas" style="background-color: green">							
-						</form>
+							<form action="midlet" method="post">
+								<input type="hidden" name="form" value="carregarVagas">
+								<input type="submit" value="Ver todas as vagas" style="background-color: green">							
+							</form>
 						</center>
 					</div>
 				</section>
@@ -43,43 +43,59 @@
 			<!-- Vagas -->
 				<section class="wrapper style1">
 					<div class="container">
-						<div class="row">
-                            
-                            <c:forEach var="n" items="${vagas}">
-                            
-							<section class="6u 12u(narrower)">
-								<div class="box post">
-									<a href="#" class="image left"><img src="images/logo-adoteumgatinho.jpg" alt="" /></a>
-									<div class="inner">
-										<h3>${n.nm_vaga}</h3>
-										<p>Número de vagas: ${n.nr_vaga}<br>
-											Descrição: ${n.ds_vaga}<br>
-											Salário: ${n.vl_salario}<br>
-											CNPJ: ${n.t_ONG_EMPRESA_nr_cnpj}
-										</p>
-										<c:if test="${empty n.t_ONG_USUARIO_nr_cpf}">
-	                                        <form action="midlet" method="post">
-	                                        	<input type="hidden"name ="form" value="inscrever">
-	                                        	<input type="submit" style="background-color: #37c0fb" value="Inscreva-se">
-	                                        </form>
-                                        </c:if>
-										<c:if test="${a == n.t_ONG_USUARIO_nr_cpf}">
-		                                        <form action="midlet" method="post">
-		                                        	<input type="hidden" name ="form" value="desinscrever">
-		                                        	<input type="submit" style="background-color: red" value="Desinscrever-se">
-		                                        </form>
-                                        </c:if>
-                                        <c:if test="${!empty n.t_ONG_USUARIO_nr_cpf && a != n.t_ONG_USUARIO_nr_cpf}">
-         	                                <form action="midlet" method="post">
-	                                        	<input type="hidden"name ="form" value="inscrever">
-	                                        	<input type="submit" style="background-color: #37c0fb" value="Inscreva-se">
-	                                        </form>
-                                        </c:if>
+						<div class="row">                            
+                            <c:forEach var="n" items="${vagas}" varStatus="loop">
+								<section class="6u 12u(narrower)">
+									<div class="box post">
+									<c:if test="${loop.index == 0}">
+										<a href="#" class="image left"><img src="images/logo-adoteumgatinho.jpg" alt="" /></a>
+									</c:if>
+									<c:if test="${loop.index == 1}">
+										<a href="#" class="image left"><img src="images/preview-Fundação_Roberto_Marinho_Rede_Globo.png" alt="" /></a>
+									</c:if>
+									<c:if test="${loop.index == 2}">
+										<a href="#" class="image left"><img src="images/Rotaract_color_regular.jpg" alt="" /></a>
+									</c:if>
+									<c:if test="${loop.index == 3}">
+										<a href="#" class="image left"><img src="images/aacd_logo1.png" alt="" /></a>
+									</c:if>
+									<c:if test="${loop.index == 4}">
+										<a href="#" class="image left"><img src="images/347.jpg" alt="" /></a>
+									</c:if>
+									<c:if test="${loop.index > 4}">
+										<a href="#" class="image left"><img src="images/logo-adoteumgatinho.jpg" alt="" /></a>
+									</c:if>
+										<div class="inner">
+											<h3>${n.nm_vaga}</h3>
+											<p>Número de vagas: ${n.nr_vaga}<br>
+												Descrição: ${n.ds_vaga}<br>
+												Salário: ${n.vl_salario}<br>
+												CNPJ: ${n.t_ONG_EMPRESA_nr_cnpj}
+											</p>
+											<c:if test="${!empty a}">
+												<c:if test="${empty n.t_ONG_USUARIO_nr_cpf}">
+			                                        <form action="midlet" method="post">
+			                                        	<input type="hidden"name ="form" value="inscrever">
+			                                        	<input type="submit" style="background-color: #37c0fb" value="Inscreva-se">
+			                                        </form>
+		                                        </c:if>
+												<c:if test="${a == n.t_ONG_USUARIO_nr_cpf}">
+				                                        <form action="midlet" method="post">
+				                                        	<input type="hidden" name ="form" value="desinscrever">
+				                                        	<input type="submit" style="background-color: red" value="Desinscrever-se">
+				                                        </form>
+		                                        </c:if>
+		                                        <c:if test="${!empty n.t_ONG_USUARIO_nr_cpf && a != n.t_ONG_USUARIO_nr_cpf}">
+		         	                                <form action="midlet" method="post">
+			                                        	<input type="hidden"name ="form" value="inscrever">
+			                                        	<input type="submit" style="background-color: #37c0fb" value="Inscreva-se">
+			                                        </form>
+		                                        </c:if> 
+	                                        </c:if>	                                        
+										</div>
 									</div>
-								</div>
-							</section>                            
+								</section>                            
                             </c:forEach>
-							
 						</div>
 					</div>
 				</section>

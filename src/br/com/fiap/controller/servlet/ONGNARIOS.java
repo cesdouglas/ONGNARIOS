@@ -108,7 +108,7 @@ public class ONGNARIOS extends HttpServlet {
 		}
 	}
 	
-	//Carregar vagas
+	//Carregar vagas vagas.jsp
 	protected void carregarVagas(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
 		try{
 			VagaBO bo = new VagaBO();		
@@ -118,6 +118,19 @@ public class ONGNARIOS extends HttpServlet {
 			throw new Excecao(e);
 		}
 	}
+	
+	//Carregar vagas perfil.jsp
+	protected void carregarVagas2(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
+		try{
+			VagaBO bo = new VagaBO();		
+			request.setAttribute("vagas", bo.carregarTodas());
+			request.getRequestDispatcher("perfil.jsp").forward(request, response);
+		}catch(Exception e){
+			throw new Excecao(e);
+		}
+	}
+	
+	
 	
 	//Buscar Vaga
 	protected void procurarVaga(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
@@ -237,12 +250,54 @@ public class ONGNARIOS extends HttpServlet {
 		}
 	}
 	
+	//Editar Vaga
+	protected void atualizarVaga (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
+		VagaBO bo = new VagaBO();
+		try{
+			VagaBean v = new VagaBean();
+			v.setNm_vaga(request.getParameter("nome"));
+			v.setNr_vaga(Integer.parseInt(request.getParameter("nr_vaga")));
+			v.setDs_vaga(request.getParameter("descricao"));
+			v.setVl_salario(Double.parseDouble(request.getParameter("salario")));
+			HttpSession session = request.getSession();
+			v.setT_ONG_EMPRESA_nr_cnpj((String)session.getAttribute("cnpj"));
+			v.setCd_vaga(Integer.parseInt(request.getParameter("cd_vaga")));
+			if(bo.atualizar(v)>0){
+				request.setAttribute("msg", "Dados atualizados com sucesso");
+				request.getRequestDispatcher("index.jsp").forward(request, response);				
+			}else{
+				request.setAttribute("msg", "Ocorreu algum erro, verifique os campos");
+				request.getRequestDispatcher("perfil.jsp").forward(request, response);	
+			}
+		}catch(Exception e){
+			throw new Excecao(e);
+		}
+	}
+	
+	
+	//Apagar Vaga
+	protected void apagarVaga (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
+		VagaBO bo = new VagaBO();
+		try{
+			int id = Integer.parseInt(request.getParameter("id"));
+			if(bo.deletar(id)>0){
+				request.setAttribute("msg", "Vaga apagada com sucesso");
+				request.getRequestDispatcher("perfil.jsp").forward(request, response);
+			}else{
+				request.setAttribute("msg", "Ocorreu algum erro desconhecido");
+				request.getRequestDispatcher("perfil.jsp").forward(request, response);	
+			}
+		}catch(Exception e){
+			throw new Excecao(e);
+		}
+	}
+	
+	
 	//Apagar dados Empresa
 	protected void apagarEmpresa (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
 		EmpresaBO bo = new EmpresaBO();
 		try{
 			HttpSession session = request.getSession();
-			System.out.println("teste");
 			if(bo.deletar((String)session.getAttribute("cnpj"))>0){
 				request.setAttribute("msg", "Dados apagados com sucesso");
 				logoutAmbos(request,response);
@@ -348,6 +403,12 @@ public class ONGNARIOS extends HttpServlet {
 				desinscreverVaga(request,response);
 			}else if(request.getParameter("form").equals("buscarVaga")){
 				procurarVaga(request,response);
+			}else if(request.getParameter("form").equals("apagarVaga")){
+				apagarVaga(request,response);
+			}else if(request.getParameter("form").equals("atualizarVaga")){
+				atualizarVaga(request,response);
+			}else if(request.getParameter("form").equals("carregarVagas2")){
+				carregarVagas2(request,response);
 			}
 		}catch(Exception e){
 			response.sendRedirect("erro.jsp");

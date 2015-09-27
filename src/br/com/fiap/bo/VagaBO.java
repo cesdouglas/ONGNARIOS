@@ -25,7 +25,7 @@ public class VagaBO {
 		return dao.update(e);
 	}
 	
-	public int deletar(String cd_vaga) throws Exception{
+	public int deletar(int cd_vaga) throws Exception{
 		return dao.delete(cd_vaga);
 	}
 	

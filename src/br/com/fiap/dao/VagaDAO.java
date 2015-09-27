@@ -52,22 +52,21 @@ public class VagaDAO {
 	}
 	
 	public int update(VagaBean e) throws Exception{
-		PreparedStatement estrutura = this.conexao.prepareStatement("UPDATE T_ONG_VAGA SET nm_vaga = ?, nr_vaga = ?, ds_vaga = ?, vl_salario = ?, T_ONG_USUARIO_nr_cpf = ?, T_ONG_EMPRESA_nr_cnpj = ? WHERE cd_vaga = ?");		
+		PreparedStatement estrutura = this.conexao.prepareStatement("UPDATE T_ONG_VAGA SET nm_vaga = ?, nr_vaga = ?, ds_vaga = ?, vl_salario = ?, T_ONG_EMPRESA_nr_cnpj = ? WHERE cd_vaga = ?");		
 		estrutura.setString(1, e.getNm_vaga());
 		estrutura.setInt(2, e.getNr_vaga());
 		estrutura.setString(3, e.getDs_vaga());
 		estrutura.setDouble(4, e.getVl_salario());
-		estrutura.setString(5, e.getT_ONG_USUARIO_nr_cpf());
-		estrutura.setString(6, e.getT_ONG_EMPRESA_nr_cnpj());
-		estrutura.setInt(7, e.getCd_vaga());
+		estrutura.setString(5, e.getT_ONG_EMPRESA_nr_cnpj());
+		estrutura.setInt(6, e.getCd_vaga());
 		int saida = estrutura.executeUpdate();
 		estrutura.close();
 		return saida;
 	}
 	
-	public int delete(String cd_vaga) throws Exception{
+	public int delete(int cd_vaga) throws Exception{
 		PreparedStatement estrutura = this.conexao.prepareStatement("DELETE FROM T_ONG_VAGA WHERE cd_vaga = ?");		
-		estrutura.setString(1, cd_vaga);
+		estrutura.setInt(1, cd_vaga);
 		int saida = estrutura.executeUpdate();
 		estrutura.close();
 		return saida;

@@ -83,6 +83,12 @@
 										</div>
 									</div>
 							</section>
+								<center>
+									<form action="midlet" method="post">
+										<input type="hidden" name="form" value="carregarVagas2">
+										<input type="submit" value="Ver minhas vagas" style="background-color: green ; position: absolute; margin-top: -50px; margin-left: 55px;">							
+									</form>
+								</center>
 						</c:if>
 						<c:if test="${!empty h}">
                             <section class="6u 12u(narrower)" id="empresa" style="margin-left: 330px; margin-top: 40px">
@@ -128,8 +134,59 @@
 										</div>
 										</div>
 									</div>
-							</section>
+							</section>							
 						</c:if>
+						
+						
+						<% 
+							   String teste1000 = (String)session.getAttribute("cnpj"); 
+							   application.setAttribute("cnpj", teste1000); 
+					 	%>
+						<c:forEach var="n" items="${vagas}">
+							<c:if test="${!empty n && n.t_ONG_EMPRESA_nr_cnpj == cnpj}">
+							       <section class="6u 12u(narrower)" id="empresa" style="margin-left: 330px; margin-top: 40px">
+									<h3>Editar Vagas</h3>
+									<form action="midlet" method="post">
+										
+	                                    <div class="row 50%">
+											<div class="6u 12u(mobilep)">	
+	                                            <input type="text" name="nome" id="name" placeholder="Nome" maxlength="40" required="required" value="${n.nm_vaga}"/>
+											</div>
+											
+											<div class="2u 3u(mobilep)">
+	                                            <input type="text" name="nr_vaga" id="nr_vaga" placeholder="Numero de Vagas" maxlength="4" required="required" value="${n.nr_vaga}">
+											</div>
+											
+											<div class="4u 20u(mobilep)">							
+	                                            <input type="text" name="descricao" id="descricao" placeholder="Descrição" maxlength="120" required="required" value="${n.ds_vaga}">
+											</div>										
+																					
+											<div class="6u 12u(mobilep)">
+												<input type="text" name="salario" id="salario" placeholder="Sálário" maxlength="10" required="required" value="${n.vl_salario}"/> 
+	                                        </div>
+	                                        
+	                                        <input type="hidden" name="cd_vaga" value="${n.cd_vaga}">
+	                             
+	                                        <input type="hidden" name="form" value="atualizarVaga">
+	                                        <div class="row 50%">
+											<div class="12u">
+												<ul class="actions">
+	                                                <li><input type="submit" class="button alt" value="Atualizar"/></li>
+	                                                <li>
+	                                                </form>
+														<form action="midlet" method="post" id="formApagar">
+															<input type="hidden" name="form" value="apagarVaga">		
+															<input type="hidden" name="id" value="${n.cd_vaga}">		
+															<input type="submit" id="apagar" value="Apagar Vaga" style="background: red;margin-left: 188px;margin-top: -51px;position: absolute;">							
+														</form>
+													</li>
+												</ul>
+											</div>
+											</div>
+										</div>
+								</section>
+							</c:if>
+						</c:forEach>
 						<script type="text/javascript">
 // 							$('#apagar').click(function(){
 // 								var r = confirm("Você tem certeza que deseja apagar sua conta?");

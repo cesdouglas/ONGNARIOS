@@ -26,7 +26,7 @@
 					<div class="box highlight">
 						<i class="icon major fa-exclamation-triangle"></a></i>
 						<h3>
-							ERRO! <br> Página não enxontrada!
+							ERRO! <br> Página não encontrada!
 						</h3>
 					</div>
 				</section>
