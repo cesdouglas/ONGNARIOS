@@ -15,7 +15,7 @@ public class EmpresaDAO {
 	}
 	
 	//Insere os dados da ONG
-	public boolean insert(EmpresaBean e) throws Exception{
+	public void insert(EmpresaBean e) throws Exception{
 		String sql = "INSERT INTO T_ONG_EMPRESA " + "(nr_cnpj, nm_empresa, ds_endereco, nr_telefone, nr_ddd, ds_email, ds_senha) VALUES (?,?,?,?,?,?,?)";
 		PreparedStatement estrutura = conexao.prepareStatement(sql);
 		estrutura.setString(1, e.getNr_cnpj());
@@ -25,13 +25,8 @@ public class EmpresaDAO {
 		estrutura.setInt(5, e.getNr_ddd());
 		estrutura.setString(6, e.getDs_email());
 		estrutura.setString(7, e.getDs_senha());
-		boolean stmt = estrutura.execute();
-		estrutura.close();
-		if (stmt){
-			return stmt;
-		}else{
-			return stmt;
-		}
+		estrutura.execute();
+		estrutura.close();		
 	}
 	
 	public EmpresaBean search(String cnpj) throws Exception{

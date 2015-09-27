@@ -92,6 +92,7 @@ public class ONGNARIOS extends HttpServlet {
 	//Logout, usado tanto para Empresa quanto Usuário
 	protected void logoutAmbos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
 		HttpSession session = request.getSession();
+		//Destruir sessão
 		session.invalidate();
 		request.setAttribute("msg", "Logout com sucesso!");
 		request.getRequestDispatcher("index.jsp").forward(request, response);
@@ -100,6 +101,7 @@ public class ONGNARIOS extends HttpServlet {
 	//Valida o login de ambos
 	protected boolean validaLogin(HttpServletRequest request) throws ServletException, IOException, Exception {
 		HttpSession session = request.getSession();
+		//Verifica se esta logado
 		String logado = (String)session.getAttribute("logado");
 		if (logado.equals("sim")){
 			return true;
@@ -149,6 +151,7 @@ public class ONGNARIOS extends HttpServlet {
 	protected void inserirVaga(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
 		VagaBO bo = new VagaBO();
 		try{
+			//Setando vagas no beans
 			VagaBean v = new VagaBean();
 			v.setNm_vaga(request.getParameter("nome"));
 			v.setNr_vaga(Integer.parseInt(request.getParameter("nr_vaga")));
@@ -156,6 +159,7 @@ public class ONGNARIOS extends HttpServlet {
 			v.setVl_salario(Double.parseDouble(request.getParameter("salario")));
 			HttpSession session = request.getSession();
 			v.setT_ONG_EMPRESA_nr_cnpj((String)session.getAttribute("cnpj"));
+			//Insere no bo e verifica
 			if(bo.inserir(v) == true){
 				request.setAttribute("msg", "Vaga cadastrada com sucesso!");
 				request.getRequestDispatcher("index.jsp").forward(request, response);
@@ -172,10 +176,12 @@ public class ONGNARIOS extends HttpServlet {
 	protected void inserirEmpresa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
 		EmpresaBO ebo = new EmpresaBO();
 		try{
+			//Inserir Empresa e verifica se foi inserido ou não
 			if(ebo.inserir(request.getParameter("cnpj"), request.getParameter("nome"), request.getParameter("endereco"), Integer.parseInt(request.getParameter("telefone")),
 					Integer.parseInt(request.getParameter("ddd")), request.getParameter("email"), request.getParameter("senha")) == true){
 				request.setAttribute("msg", "Empresa cadastrada com sucesso!");
 				request.getRequestDispatcher("index.jsp").forward(request, response);
+			//Se não vai para pag de erro
 			}else{
 				request.setAttribute("msg", "Ocorreu um erro no cadastro!");
 				request.getRequestDispatcher("erro.jsp").forward(request, response);
