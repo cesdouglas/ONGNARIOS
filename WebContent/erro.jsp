@@ -1,34 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
-<!DOCTYPE HTML>
-
-<html>
-<head>
-<title>ONGNários</title>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="assets/css/main.css" />
-
-</head>
-<body>
-	<div id="page-wrapper">
-
-		<!-- Login -->
-		<div id="login">
-			<a href="login.jsp" class="button">Login</a>
-		</div>
-
-		<!-- Header -->
-		<div id="header">
-
-			<!-- Logo -->
-			<h1>
-				<a href="index.jsp" id="logo">ONG<em>nários</em></a>
-			</h1>
-
-			<!-- Cabeçalho -->
-
+<%@ include file="cabecalho.jsp" %>
 			<nav id="nav">
 				<ul>
 					<li class="current"><a href="index.jsp">Home</a></li>
@@ -118,37 +91,4 @@
 			</div>
 		</div>
 
-		<!-- Rodapé-->
-		<!-- Icons -->
-		<ul class="icons">
-			<li><a href="erro.jsp" class="icon fa-twitter"><span
-					class="label">Twitter</span></a></li>
-			<li><a href="erro.jsp" class="icon fa-facebook"><span
-					class="label">Facebook</span></a></li>
-			<li><a href="erro.jsp" class="icon fa-linkedin"><span
-					class="label">LinkedIn</span></a></li>
-			<li><a href="erro.jsp" class="icon fa-instagram"><span
-					class="label">Instagram</span></a></li>
-		</ul>
-
-		<!-- Copyright -->
-		<div class="copyright">
-			<ul class="menu">
-				<li>&copy; Untitled. All rights reserved</li>
-				<li>Design: LDBL</a></li>
-			</ul>
-		</div>
-
-	</div>
-
-	</div>
-
-	<!-- Scripts -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/jquery.dropotron.min.js"></script>
-	<script src="assets/js/skel.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<script src="assets/js/main.js"></script>
-
-</body>
-</html>
+	<%@ include file="rodape.jsp" %>

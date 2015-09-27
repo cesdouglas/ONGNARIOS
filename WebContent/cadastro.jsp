@@ -2,29 +2,9 @@
     pageEncoding="ISO-8859-1"%>
 
     
-    <!DOCTYPE HTML>
-<html>
-	<head>
-		<title>ONGNários</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-	</head>
-	<body>
+<%@ include file="cabecalho.jsp" %>
 		<div id="page-wrapper">
         
-			<!-- Login -->
-            <div id="login">
-                        <a href="login.jsp" class="button">Login</a></div>
-            
-            <!-- Header -->
-				<div id="header">                    
-
-					<!-- Logo -->
-						<h1><a href="index.jsp" id="logo">ONG <em>Nários</em></a></h1>  
-                    	
-                    <!-- Cabeçalho -->
                                                          
 						<nav id="nav">
 							<ul>
@@ -38,6 +18,7 @@
 						</nav>
 
 				</div>
+			</div>
 
 			
 		
@@ -107,6 +88,7 @@
 										</div>
 									</div>
                                  </form>
+                                 <a href="javascript:;" id="voltar" style="font-size: 12px">Escolher de novo?</a>
 							</section>
                               <!--Cadastro Usuário-->
 							<section class="6u 12u(narrower)" id="usuario" style="display:none;">
@@ -149,6 +131,7 @@
 										</div>
 									</div>
                                  </form>
+                                 <a href="javascript:;" id="voltar2" style="font-size: 12px; margin-left: 10px;">Escolher de novo?</a>
 							</section>
 							<script type="text/javascript">
 								$('#button_empresa').click(function(){
@@ -159,35 +142,18 @@
 									$('#buttons').hide();
 									$('#usuario').show();
 								});
+								$('#voltar').click(function(){
+									$('#usuario').hide();
+									$('#empresa').hide();
+									$('#buttons').show();
+								});
+								$('#voltar2').click(function(){
+									$('#usuario').hide();
+									$('#empresa').hide();
+									$('#buttons').show();
+								});
 							</script>
 						</div>
 					</div>
 
-					<!-- RodapÃ©-->
-                    <!-- Icons -->
-						<ul class="icons">                          
-							<li><a href="erro.jsp" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-							<li><a href="erro.jsp" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-							<li><a href="erro.jsp" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
-                            <li><a href="erro.jsp" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-						</ul>
-
-					<!-- Copyright -->
-						<div class="copyright">
-							<ul class="menu">
-								<li>&copy; Untitled. All rights reserved</li><li>Design: LDBL</a></li>
-							</ul>
-						</div>
-
-				</div>
-
-		</div>
-
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.dropotron.min.js"></script>
-			<script src="assets/js/skel.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-	</body>
-</html>
+					<%@ include file="rodape.jsp" %>
