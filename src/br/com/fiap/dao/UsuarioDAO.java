@@ -73,16 +73,16 @@ public class UsuarioDAO {
 		estrutura.setString(2, senha);
 		ResultSet resultado = estrutura.executeQuery();
 		resultado.next();
-		UsuarioBean e = new UsuarioBean();		
-		e.setNr_cpf(resultado.getString("nr_cpf"));
-		e.setNm_usuario(resultado.getString("nm_usuario"));
-		e.setNr_telefone(Integer.parseInt(resultado.getString("nr_telefone")));
-		e.setNr_ddd(Integer.parseInt(resultado.getString("nr_ddd")));
-		e.setDs_email(resultado.getString("ds_email"));
-		e.setDs_senha(resultado.getString("ds_senha"));	
+		UsuarioBean u = new UsuarioBean();		
+		u.setNr_cpf(resultado.getString("nr_cpf"));
+		u.setNm_usuario(resultado.getString("nm_usuario"));
+		u.setNr_telefone(Integer.parseInt(resultado.getString("nr_telefone")));
+		u.setNr_ddd(Integer.parseInt(resultado.getString("nr_ddd")));
+		u.setDs_email(resultado.getString("ds_email"));
+		u.setDs_senha(resultado.getString("ds_senha"));	
 		resultado.close();
 		estrutura.close();
-		return e;
+		return u;
 	}
 	
 	

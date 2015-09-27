@@ -1,5 +1,6 @@
 package br.com.fiap.bo;
 
+
 import br.com.fiap.beans.UsuarioBean;
 import br.com.fiap.dao.UsuarioDAO;
 
@@ -11,7 +12,7 @@ public class UsuarioBO {
 		dao = new UsuarioDAO();
 	}
 	
-	public boolean inserir(int id, String cpf, String nome, int telefone, int ddd, String email, String senha) throws Exception{
+	public boolean inserir(String cpf, String nome, int telefone, int ddd, String email, String senha) throws Exception{
 		UsuarioBean u = new UsuarioBean(cpf, nome, telefone, ddd, email, senha);
 		dao.insert(u);
 		return true;
@@ -38,4 +39,10 @@ public class UsuarioBO {
 			return false;
 		}
 	}
+	
+	public boolean verificaLogin(){
+		
+		return true;
+	}
+	
 }

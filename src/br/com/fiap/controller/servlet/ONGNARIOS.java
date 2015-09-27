@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import br.com.fiap.beans.EmpresaBean;
 import br.com.fiap.beans.UsuarioBean;
 import br.com.fiap.bo.EmpresaBO;
 import br.com.fiap.bo.UsuarioBO;
@@ -29,27 +30,90 @@ public class ONGNARIOS extends HttpServlet {
 		// TODO Auto-generated constructor stub
 	}
 
-	protected void processarLoginUsuario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
+	protected void loginUsuario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
 		//Recupera a sessão do usuário ou cria uma nova se não existe
-		String login = request.getParameter("nr_cpf");
-		String senha = request.getParameter("ds_senha"); 
+		String login = request.getParameter("cpf");
+		String senha = request.getParameter("senha"); 
 		UsuarioBO bo = new UsuarioBO();
 		if(bo.entrar(login, senha)){
-			UsuarioBean e = new UsuarioBean();
 			HttpSession session = request.getSession();
+			//Instancia o UsuarioBean
+			UsuarioBean u = new UsuarioBean();
+			//Setando dados no bean
+			u.setNr_cpf(request.getParameter("cpf"));
+			u.setNm_usuario(request.getParameter("nome"));
+			u.setNr_telefone(Integer.parseInt(request.getParameter("telefone")));
+			u.setNr_ddd(Integer.parseInt(request.getParameter("ddd")));
+			u.setDs_email(request.getParameter("email"));
+			u.setDs_senha(request.getParameter("senha"));
+			
 			//Adiciona o atributo usuário na sessão
-			session.setAttribute("nr_cpf", e.getNr_cpf());
-			session.setAttribute("nm_usuario", e.getNm_usuario());
-			session.setAttribute("nr_telefone", e.getNr_telefone());
-			session.setAttribute("nr_ddd", e.getNr_ddd());
-			session.setAttribute("ds_email", e.getDs_email());
-			session.setAttribute("ds_senha", e.getDs_senha());
-			session.setAttribute("logado", "true");
+			session.setAttribute("cpf", u.getNr_cpf());
+			session.setAttribute("nome", u.getNm_usuario());
+			session.setAttribute("telefone", u.getNr_telefone());
+			session.setAttribute("ddd", u.getNr_ddd());
+			session.setAttribute("email", u.getDs_email());
+			session.setAttribute("senha", u.getDs_senha());
+			session.setAttribute("logado", "sim");
 			request.setAttribute("msg", "Logado com sucesso!");
-			request.getRequestDispatcher("testeUpdateUsuario.jsp").forward(request, response);
+			request.getRequestDispatcher("vaga.jsp").forward(request, response);
 		}else{
 			request.setAttribute("msg", "CPF ou Senha errada!");
 			request.getRequestDispatcher("testeLogin.jsp").forward(request, response);
+		}
+	}
+	
+	
+	protected void loginEmpresa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
+		//Recupera a sessão da empresa ou cria uma nova se não existe
+		String login = request.getParameter("cnpj");
+		String senha = request.getParameter("senha"); 
+		EmpresaBO ebo = new EmpresaBO();
+		if(ebo.entrar(login, senha)){
+			HttpSession session = request.getSession();
+			//Instancia o EmpresaBean
+			EmpresaBean e = new EmpresaBean();
+			
+			//Setando dados no bean
+			e.setNr_cnpj(request.getParameter("cpf"));
+			e.setNm_empresa(request.getParameter("nome"));
+			e.setDs_endereco(request.getParameter("endereco"));
+			e.setNr_telefone(Integer.parseInt(request.getParameter("telefone")));
+			e.setNr_ddd(Integer.parseInt(request.getParameter("ddd")));
+			e.setDs_email(request.getParameter("email"));
+			e.setDs_senha(request.getParameter("senha"));
+			
+			//Adiciona o atributo usuário na sessão
+			session.setAttribute("cpf", e.getNr_cnpj());
+			session.setAttribute("nome", e.getNm_empresa());
+			session.setAttribute("endereco", e.getDs_endereco());
+			session.setAttribute("telefone", e.getNr_telefone());
+			session.setAttribute("ddd", e.getNr_ddd());
+			session.setAttribute("email", e.getDs_email());
+			session.setAttribute("senha", e.getDs_senha());
+			session.setAttribute("logado", "sim");
+			request.setAttribute("msg", "Logado com sucesso!");
+			request.getRequestDispatcher("vaga.jsp").forward(request, response);
+		}else{
+			request.setAttribute("msg", "CNPJ ou Senha errada!");
+			request.getRequestDispatcher("testeLogin.jsp").forward(request, response);
+		}
+	}
+	
+	//Logout, usado tanto para Empresa quanto Usuário
+	protected void logoutAmbos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
+		HttpSession session = request.getSession();
+		session.invalidate();
+	}
+	
+	//Valida o login de ambos
+	protected boolean validaLogin(HttpServletRequest request) throws ServletException, IOException, Exception {
+		HttpSession session = request.getSession();
+		String logado = (String)session.getAttribute("logado");
+		if (logado.equals("sim")){
+			return true;
+		}else{
+			return false;
 		}
 	}
 
@@ -57,7 +121,6 @@ public class ONGNARIOS extends HttpServlet {
 	protected void inserirEmpresa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
 		EmpresaBO ebo = new EmpresaBO();
 		try{
-
 			if(ebo.inserir(request.getParameter("cnpj"), request.getParameter("nome"), request.getParameter("endereco"), Integer.parseInt(request.getParameter("telefone")),
 					Integer.parseInt(request.getParameter("ddd")), request.getParameter("email"), request.getParameter("senha")) == true){
 				request.setAttribute("msg", "Empresa cadastrada com sucesso!");
@@ -76,9 +139,8 @@ public class ONGNARIOS extends HttpServlet {
 	protected void inserirUsuario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
 		UsuarioBO ubo = new UsuarioBO();
 		try{
-			if(ubo.inserir(Integer.parseInt(request.getParameter("id")),request.getParameter("cpf"), request.getParameter("nome"), Integer.parseInt(request.getParameter("telefone")),
+			if(ubo.inserir(request.getParameter("cpf"), request.getParameter("nome"), Integer.parseInt(request.getParameter("telefone")),
 					Integer.parseInt(request.getParameter("ddd")), request.getParameter("email"), request.getParameter("senha"))){
-
 				request.setAttribute("msg", "Usuário cadastrado com sucesso!");
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}else{
@@ -90,18 +152,26 @@ public class ONGNARIOS extends HttpServlet {
 		}
 	}
 
-	//    protected int atualizarUsuario (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
-	//    	
-	//    	
-	//    	request.setAttribute("msg", "Dados atualizados com sucesso");
-	//    	request.getRequestDispatcher("testeUpdateUsuario.jsp").forward(request, response);
-	//    }
+
+
+//	protected int atualizarUsuario (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
+//		UsuarioBO ubo = new UsuarioBO();
+//		try{
+//			if(ubo.atualizar((request.getParameter("cpf"), request.getParameter("nome"), Integer.parseInt(request.getParameter("telefone")),
+//					Integer.parseInt(request.getParameter("ddd")), request.getParameter("email"), request.getParameter("senha")));))
+//
+//			request.setAttribute("msg", "Dados atualizados com sucesso");
+//			request.getRequestDispatcher("testeUpdateUsuario.jsp").forward(request, response);
+//		}
+//	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+
+
 	}
 
 	/**
@@ -114,8 +184,9 @@ public class ONGNARIOS extends HttpServlet {
 				inserirEmpresa(request,response);
 			}else if (request.getParameter("form").equals("insertUsuario")){
 				inserirUsuario(request, response);
-			}else{
-				processarLoginUsuario(request,response);
+			}
+			else if (request.getParameter("form").equals("login")){
+				loginUsuario(request,response);
 			}
 		}catch(Exception e){
 			response.sendRedirect("erro.jsp");

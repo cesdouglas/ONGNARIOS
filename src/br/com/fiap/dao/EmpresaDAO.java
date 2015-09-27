@@ -67,11 +67,33 @@ public class EmpresaDAO {
 		return saida;
 	}
 	
+	//Deleta empresa
 	public int delete(String cnpj) throws Exception{
 		PreparedStatement estrutura = this.conexao.prepareStatement("DELETE FROM T_ONG_EMPRESA WHERE nr_cnpj = ?");		
 		estrutura.setString(1, cnpj);
 		int saida = estrutura.executeUpdate();
 		estrutura.close();
 		return saida;
+	}
+	
+	//Verifica login
+	public EmpresaBean login(String cnpj, String senha) throws Exception{	
+		String sql = "SELECT * FROM T_ONG_USUARIO WHERE nr_cnpj LIKE ? AND ds_senha = ?";
+		PreparedStatement estrutura = conexao.prepareStatement(sql);
+		estrutura.setString(1, cnpj);
+		estrutura.setString(2, senha);
+		ResultSet resultado = estrutura.executeQuery();
+		resultado.next();
+		EmpresaBean e = new EmpresaBean();		
+		e.setNr_cnpj(resultado.getString("nr_cnpj"));
+		e.setNm_empresa(resultado.getString("nm_empresa"));
+		e.setDs_endereco(resultado.getString("ds_endereco"));
+		e.setNr_telefone(Integer.parseInt(resultado.getString("nr_telefone")));
+		e.setNr_ddd(Integer.parseInt(resultado.getString("nr_ddd")));
+		e.setDs_email(resultado.getString("ds_email"));
+		e.setDs_senha(resultado.getString("ds_senha"));	
+		resultado.close();
+		estrutura.close();
+		return e;
 	}
 }
