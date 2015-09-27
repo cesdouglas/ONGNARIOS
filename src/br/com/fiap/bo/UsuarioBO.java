@@ -11,8 +11,10 @@ public class UsuarioBO {
 		dao = new UsuarioDAO();
 	}
 	
-	public void inserir(UsuarioBean e) throws Exception{
-		dao.insert(e);
+	public boolean inserir(int id, String cpf, String nome, int telefone, int ddd, String email, String senha) throws Exception{
+		UsuarioBean u = new UsuarioBean(cpf, nome, telefone, ddd, email, senha);
+		dao.insert(u);
+		return true;
 	}
 	
 	public UsuarioBean buscar(String cpf) throws Exception{
