@@ -69,7 +69,7 @@
 											<h3>${n.nm_vaga}</h3>
 											<p>Número de vagas: ${n.nr_vaga}<br>
 												Descrição: ${n.ds_vaga}<br>
-												Salário: ${n.vl_salario}<br>
+												Salário: <fmt:formatNumber value="${n.vl_salario}" type="currency"/><br>
 												CNPJ: ${n.t_ONG_EMPRESA_nr_cnpj}
 											</p>
 											<c:if test="${!empty a}">

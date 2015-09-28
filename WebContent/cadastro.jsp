@@ -76,7 +76,7 @@
                                         </div>
                                     
                                         <div class="6u 12u(mobilep)">
-											<input type="text" name="senha" id="senha" placeholder="Senha" maxlength="12" required="required"/>
+											<input type="password" name="senha" id="senha" placeholder="Senha" maxlength="12" required="required"/>
                                         </div>
                                         <input type="hidden" name="form" value="insertEmpresa">
                                         <div class="row 50%">
@@ -120,7 +120,7 @@
                                         </div>
                                     
                                         <div class="6u 12u(mobilep)">
-											<input type="text" name="senha" id="senha" placeholder="Senha" maxlength="12" required="required"/>
+											<input type="password" name="senha" id="senha" placeholder="Senha" maxlength="12" required="required"/>
                                         </div>
                                         	<input type="hidden" name="form" value="insertUsuario">
                                         <div class="row 50%">

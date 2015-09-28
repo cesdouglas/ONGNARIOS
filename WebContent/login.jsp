@@ -26,7 +26,7 @@
 									<input type="text" name="cnpj" id="cnpj" placeholder="CNPJ" maxlength="14" required="required"/>
 								</div>	
 	                            <div class="3u 6u(mobilep)">
-									<input type="text" name="senha" id="senha" placeholder="Senha" maxlength="12" required="required" style="margin-top: 10px"/>
+									<input type="password" name="senha" id="senha" placeholder="Senha" maxlength="12" required="required" style="margin-top: 10px"/>
 	                            </div>
 	                   	        <input type="hidden" name="form" value="loginEmpresa">
 	                           	<div class="row 50%">
@@ -47,7 +47,7 @@
 									<input type="text" name="cpf" id="cpf" placeholder="CPF" maxlength="14" required="required"/>
 								</div>	
 	                            <div class="3u 6u(mobilep)">
-									<input type="text" name="senha" id="senha" placeholder="Senha" maxlength="12" required="required" style="margin-top: 10px"/>
+									<input type="password" name="senha" id="senha" placeholder="Senha" maxlength="12" required="required" style="margin-top: 10px"/>
 	                            </div>
 	                   	        <input type="hidden" name="form" value="loginUsuario">
 	                           	<div class="row 50%">

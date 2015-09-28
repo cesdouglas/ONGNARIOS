@@ -21,23 +21,48 @@
 			</div>
 
 			
-		
 			<!-- Footer -->
 				<div id="footer">
 					<div class="container">                            
-                            <section class="3u 6u$(narrower) 12u$(mobilep)">
+                            <section class="6u 12u(narrower)">
                             <h3>Cadastrar Vaga</h3>
+                            
                             	<form action="midlet" method="post">
-	                            	<input type="hidden" name="form" value="insertVaga">
+           
+           
+          								 <div class="row 50%">
+										<div class="6u 12u(mobilep)">
+											<input type="hidden" name="form" value="insertVaga">
 	                   			<% String teste = (String)session.getAttribute("cnpj"); 
 			 						application.setAttribute("teste", teste); %>
-	                            	<input type="hidden" name="cnpj" value="${teste}">
-	                            	<input type="text" name="nome" required="required" maxlength="40" placeholder="Titulo">
-	                            	<input type="text" name="nr_vaga" required="required" maxlength="4" placeholder="Número de Vagas">
-	                            	<input type="text" name="descricao" required="required" maxlength="120" placeholder="Descrição">
-	                            	<input type="text" name="salario" required="required" maxlength="10" placeholder="Salário">
-	                            	<input type="submit" value="Cadastrar Vaga">
-                            	</form>
+										</div>
+           
+           								<div class="6u 12u(mobilep)">
+	                            		<input type="hidden" name="cnpj" value="${teste}">	                            		
+	                            		</div>
+	                            		
+	                            		<div class="6u 12u(mobilep)">
+	                            		<input type="text" name="nome" required="required" maxlength="40" placeholder="Titulo">	                            		
+	                            		</div>
+			 						
+										<div class="6u 12u(mobilep)">
+	                            		<input type="text" name="nr_vaga" required="required" maxlength="4" placeholder="Número de Vagas">
+	                            		</div>	                            	
+	                            	
+	                            		<div class="6u 12u(mobilep)">
+	                            		<input type="text" name="descricao" required="required" maxlength="120" placeholder="Descrição">
+	                            		</div>
+	                            	
+	                            	<div class="6u 12u(mobilep)">
+	                            		<input type="text" name="salario" required="required" maxlength="10" placeholder="Salário">
+	                            	</div>
+	                            	
+	                            	
+	                            	<div class="6u 12u(mobilep)">
+	                            		<input type="submit" value="Cadastrar Vaga">
+                            	</div>
+	                            	
+	                            	</form>
                             </section>
 					</div>
 				</div>
