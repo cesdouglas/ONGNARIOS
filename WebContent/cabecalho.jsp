@@ -36,11 +36,11 @@
 	z-index: 2;
 	font-size: 20px;
 	font-weight: bold;
-	height: 40px;
+	height: 30px;
 	max-height: 64px;
 }
 .mensagens2{
-	top: 40px;
+	top: 30px;
 }
 </style>
 </head>

@@ -24,19 +24,17 @@
 
 			<div class="row 50%">
 				<div class="6u 12u(mobilep)">
-					<label for="name">Nome:</label>
 					<input type="text" name="nome" id="name" placeholder="Nome"
 						required="required" value="${empresa.nm_empresa}" />
 				</div>
 
 				<div class="2u 3u(mobilep)">
-					<label for="ddd">DDD:</label>
 					<input type="text" name="ddd" id="ddd" placeholder="ddd"
 						maxlength="2" required="required" / value="${empresa.nr_ddd}">
 				</div>
 
 				<div class="4u 12u(mobilep)">
-					<label for="telefone">Telefone:</label>
+
 					<input type="text" name="telefone" id="telefone"
 						placeholder="telefone" maxlength="9" required="required"
 						value="${empresa.nr_telefone}" />
@@ -46,20 +44,17 @@
 					maxlength="14" required="required" value="${empresa.nr_cnpj}" />
 
 				<div class="6u 12u(mobilep)">
-					<label for="email">E-mail:</label>
 					<input type="text" name="email" id="email" placeholder="Email"
 						maxlength="40" required="required" value="${empresa.ds_email}" />
 				</div>
 
 				<div class="6u 12u(mobilep)">
-					<label for="endereco">Endereço:</label>
 					<input type="text" name="endereco" id="endereco"
 						placeholder="Endereço" maxlength="50" required="required"
 						value="${empresa.ds_endereco}" />
 				</div>
 
 				<div class="6u 12u(mobilep)">
-					<label for="senha">Senha:</label>
 					<input type="text" name="senha" id="senha" placeholder="Senha"
 						maxlength="12" required="required" value="${empresa.ds_senha}" />
 				</div>
@@ -79,18 +74,18 @@
 					style="background: red;">
 			</form>
 		</li>
+		<li>
+			<form action="midlet" method="post">
+				<input type="hidden" name="form" value="carregarVagas2"> <input
+					type="submit" value="Ver minhas vagas"
+					style="background-color: green;">
+			</form>
+		</li>
 		</ul>
 		</div>
 		</div>
 		</div>
 	</section>
-	<center>
-		<form action="midlet" method="post">
-			<input type="hidden" name="form" value="carregarVagas2"> <input
-				type="submit" value="Ver minhas vagas"
-				style="background-color: green; position: absolute; margin-top: 0.25em; margin-left: -1em;">
-		</form>
-	</center>
 </c:if>
 <c:if test="${!empty usuario.nr_cpf}">
 	<section class="6u 12u(narrower)" id="empresa"
@@ -100,34 +95,31 @@
 
 			<div class="row 50%">
 				<div class="6u 12u(mobilep)">
-					<label for="name">Nome:</label>
 					<input type="text" name="nome" id="name" placeholder="Nome"
 						required="required" value="${usuario.nm_usuario}" />
 				</div>
 
 				<div class="2u 3u(mobilep)">
-					<label for="ddd">DDD:</label>
 					<input type="text" name="ddd" id="ddd" placeholder="ddd"
 						maxlength="2" required="required" / value="${usuario.nr_ddd}">
 				</div>
 
 				<div class="4u 12u(mobilep)">
-					<label for="telefone">Telefone:</label>
+
 					<input type="text" name="telefone" id="telefone"
 						placeholder="telefone" maxlength="9" required="required"
 						value="${usuario.nr_telefone}" />
 				</div>
+
 				<input type="hidden" name="cpf" id="cpf" placeholder="CPF"
 					maxlength="14" required="required" value="${usuario.nr_cpf}" />
-				
+
 				<div class="6u 12u(mobilep)">
-					<label for="email">E-mail:</label>
 					<input type="text" name="email" id="email" placeholder="Email"
 						maxlength="40" required="required" value="${usuario.ds_email}" />
 				</div>
 
 				<div class="6u 12u(mobilep)">
-					<label for="senha">Senha:</label>
 					<input type="text" name="senha" id="senha" placeholder="Senha"
 						maxlength="12" required="required" value="${usuario.ds_senha}" />
 				</div>
@@ -144,7 +136,7 @@
 				type="hidden" name="cpf" id="cpf" placeholder="CPF" maxlength="14"
 				required="required" value="${usuario.nr_cpf}" /> <input
 				type="submit" id="apagar" value="Apagar Conta"
-				style="background: red; margin-left: 1em; margin-top: 1em; position: absolute;">
+				style="background: red; margin-left: 188px; margin-top: -51px; position: absolute;">
 		</form>
 		</li>
 		</ul>
@@ -159,29 +151,28 @@
 	<c:if test="${!empty n && n.t_ONG_EMPRESA_nr_cnpj == empresa.nr_cnpj}">
 		<section class="6u 12u(narrower)" id="empresa"
 			style="margin-left: 330px; margin-top: 40px">
-			<h3>Editar ${n.nm_vaga}</h3>
+			<h3>Editar Vagas</h3>
 			<form action="midlet" method="post">
 
 				<div class="row 50%">
 					<div class="6u 12u(mobilep)">
-						<label for="nameVaga">Nome:</label>
-						<input type="text" name="nome" id="nameVaga" placeholder="Nome"
+						<input type="text" name="nome" id="name" placeholder="Nome"
 							maxlength="40" required="required" value="${n.nm_vaga}" />
 					</div>
 
 
 					<div class="4u 20u(mobilep)">
-						<label for="descricao">Descrição:</label>
 						<input type="text" name="descricao" id="descricao"
 							placeholder="Descrição" maxlength="120" required="required"
 							value="${n.ds_vaga}">
 					</div>
 
 					<div class="6u 12u(mobilep)">
-						<label for="salario">Salário:</label>
 						<input type="text" name="salario" id="salario"
 							placeholder="Sálário" maxlength="10" required="required"
 							value="${n.vl_salario}" />
+						<p style="font-size: 10px">*Utilize ponto ao invés de virgula
+							para separar o decimal</p>
 					</div>
 
 					<input type="hidden" name="cd_vaga" value="${n.cd_vaga}"> <input
@@ -197,7 +188,7 @@
 				<input type="hidden" name="form" value="apagarVaga"> <input
 					type="hidden" name="id" value="${n.cd_vaga}"> <input
 					type="submit" id="apagar" value="Apagar Vaga"
-					style="background: red; margin-left: 10em; margin-top: -2.7em; position: absolute;">
+					style="background: red; margin-left: 188px; margin-top: -51px; position: absolute;">
 			</form>
 			</li>
 			</ul>
