@@ -43,4 +43,3 @@ Temporary Items
 .apdisk
 sh.exe.stackdump
 *.class
-/src/br/com/fiap/conexao/ConexaoFactory.java
