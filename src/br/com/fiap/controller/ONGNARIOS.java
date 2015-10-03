@@ -132,10 +132,9 @@ public class ONGNARIOS extends HttpServlet {
 		VagaBO bo = new VagaBO();
 		try{
 			//Recupera Session
-			HttpSession session = request.getSession();
 			//Setando vagas no beans
 			if (bo.inserir(request.getParameter("nome"), request.getParameter("descricao"), Double.parseDouble(request.getParameter("salario")),
-					(String)session.getAttribute("cnpj"))){
+					request.getParameter("cnpj"))){
 				request.setAttribute("msg", "Vaga cadastrada com sucesso!");
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}else{
@@ -192,6 +191,11 @@ public class ONGNARIOS extends HttpServlet {
 		try{
 			if(bo.atualizar(request.getParameter("cpf"), request.getParameter("nome"), Integer.parseInt(request.getParameter("telefone")),
 					Integer.parseInt(request.getParameter("ddd")), request.getParameter("email"), request.getParameter("senha")) > 0){
+				
+				HttpSession session = request.getSession();
+				
+				//Atualizar o usuário na sessão
+				session.setAttribute("usuario", bo.buscar(request.getParameter("cpf")));
 				request.setAttribute("msg", "Dados atualizados com sucesso");
 				request.getRequestDispatcher("index.jsp").forward(request, response);			
 			}else{
@@ -209,6 +213,10 @@ public class ONGNARIOS extends HttpServlet {
 		try{
 			if (bo.atualizar(request.getParameter("cnpj"), request.getParameter("nome"), request.getParameter("endereco"), Integer.parseInt(request.getParameter("telefone")),
 					Integer.parseInt(request.getParameter("ddd")), request.getParameter("email"), request.getParameter("senha"))>0){
+				HttpSession session = request.getSession();
+				
+				//Atualiza os atributos da empresa na sessão
+				session.setAttribute("empresa", bo.buscar(request.getParameter("cnpj")));
 				request.setAttribute("msg", "Dados atualizados com sucesso");
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}else{
@@ -265,8 +273,7 @@ public class ONGNARIOS extends HttpServlet {
 		EmpresaBO bo = new EmpresaBO();
 		try{
 			//Recupera CNPJ da session e verifica se apagou ou nao
-			HttpSession session = request.getSession();
-			if(bo.deletar((String)session.getAttribute("cnpj"))>0){
+			if(bo.deletar(request.getParameter("cnpj"))>0){
 				request.setAttribute("msg", "Dados apagados com sucesso");
 				logoutAmbos(request,response);
 			}else{
@@ -313,9 +320,8 @@ public class ONGNARIOS extends HttpServlet {
 		UsuarioBO bo = new UsuarioBO();
 		try{
 			//Recupera cpf da session e verifica se apagou o usuario
-			HttpSession session = request.getSession();
-			if(bo.deletar((String)session.getAttribute("cpf"))>0){
-				request.setAttribute("msg", "Dados apagados com sucesso");
+			if(bo.deletar(request.getParameter("cpf"))>0){
+				request.setAttribute("msg2", "Dados apagados com sucesso");
 				logoutAmbos(request,response);
 			}else{
 				request.setAttribute("msg", "Ocorreu algum erro desconhecido");

@@ -13,16 +13,39 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" href="assets/css/main.css" />
+<script>
+	$(window).load(function() {
+		$('.mensagens').slideDown(3000, function(){
+			$(this).slideUp(6000, 'swing');			
+		});
 
+	});
+</script>
+<style>
+	.mensagens{
+		position: absolute;
+		vertical-align: middle;
+		border: 2px solid #c30;
+		text-align: center;
+		display: none;
+		background-color: #37C0FB;
+		width: 100%;
+		height: auto;
+		z-index: 2;
+		font-size: 20px;
+		font-weight: bold;
+	}
+</style>
 </head>
 <body>
-	<center>
-		<h4>${msg}</h4>
-	</center>
+		<div class="mensagens">
+			<p>${msg}</p>
+			<p>${msg2}</p>
+		</div>
 
 	<div id="page-wrapper">
 		<!-- Login -->
-		
+
 		<c:if test="${!empty empresa.nm_empresa}">
 			<div style="position: absolute; right: 170px; top: 12px;">
 				<p>Olá ${empresa.nm_empresa}!</p>

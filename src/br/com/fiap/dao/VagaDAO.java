@@ -32,7 +32,7 @@ public class VagaDAO {
 	
 	//Procura uma vaga no bando de dados pelo nome
 	public List<VagaBean> search(String nome) throws Exception{
-		String sql = "SELECT * FROM T_ONG_VAGA WHERE nm_vaga LIKE %?% ";
+		String sql = "SELECT * FROM T_ONG_VAGA WHERE nm_vaga LIKE ?";
 		PreparedStatement estrutura = conexao.prepareStatement(sql);
 		estrutura.setString(1, nome);
 		ResultSet resultado = estrutura.executeQuery();

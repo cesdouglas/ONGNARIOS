@@ -68,6 +68,8 @@
 		<li>
 			<form action="midlet" method="post">
 				<input type="hidden" name="form" value="apagarEmpresa"> <input
+					type="hidden" name="cnpj" id="cnpj" placeholder="CNPJ"
+					maxlength="14" required="required" value="${empresa.nr_cnpj}" /> <input
 					type="submit" id="apagar" value="Apagar Conta"
 					style="background: red;">
 			</form>
@@ -131,6 +133,8 @@
 		</form>
 		<form action="midlet" method="post" id="formApagar">
 			<input type="hidden" name="form" value="apagarUsuario"> <input
+				type="hidden" name="cpf" id="cpf" placeholder="CPF" maxlength="14"
+				required="required" value="${usuario.nr_cpf}" /> <input
 				type="submit" id="apagar" value="Apagar Conta"
 				style="background: red; margin-left: 188px; margin-top: -51px; position: absolute;">
 		</form>
