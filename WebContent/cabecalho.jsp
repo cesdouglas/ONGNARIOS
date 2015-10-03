@@ -15,33 +15,46 @@
 <link rel="stylesheet" href="assets/css/main.css" />
 <script>
 	$(window).load(function() {
-		$('.mensagens').slideDown(3000, function(){
+		$('.mensagens').slideDown(2000, function(){
+			$(this).slideUp(6000, 'swing');			
+		});
+		$('.mensagens2').slideDown(2000, function(){
 			$(this).slideUp(6000, 'swing');			
 		});
 
 	});
 </script>
 <style>
-	.mensagens{
-		position: absolute;
-		vertical-align: middle;
-		border: 2px solid #c30;
-		text-align: center;
-		display: none;
-		background-color: #37C0FB;
-		width: 100%;
-		height: auto;
-		z-index: 2;
-		font-size: 20px;
-		font-weight: bold;
-	}
+.mensagens, .mensagens2 {
+	position: absolute;
+	vertical-align: middle;
+	border: 2px solid #c30;
+	text-align: center;
+	display: none;
+	background-color: #37C0FB;
+	width: 100%;
+	z-index: 2;
+	font-size: 20px;
+	font-weight: bold;
+	height: 40px;
+	max-height: 64px;
+}
+.mensagens2{
+	top: 40px;
+}
 </style>
 </head>
 <body>
-		<div class="mensagens">
+	<c:if test="${!empty msg}">
+		<span class="mensagens">
 			<p>${msg}</p>
+		</span>
+	</c:if>
+	<c:if test="${!empty msg2}">
+		<span class="mensagens2">
 			<p>${msg2}</p>
-		</div>
+		</span>
+	</c:if>
 
 	<div id="page-wrapper">
 		<!-- Login -->
