@@ -28,7 +28,8 @@ public class EmpresaBO {
 		return dao.search(cnpj);
 	}
 
-	public int atualizar(EmpresaBean e) throws Exception{
+	public int atualizar(String cnpj, String nome, String endereco, int telefone, int ddd, String email, String senha) throws Exception{
+		EmpresaBean e = new EmpresaBean(cnpj, nome, endereco, telefone, ddd, email, senha);
 		return dao.update(e);
 	}
 

@@ -28,8 +28,9 @@ public class UsuarioBO {
 		return dao.search(cpf);
 	}
 	
-	public int atualizar(UsuarioBean e) throws Exception{
-		return dao.update(e);
+	public int atualizar(String cpf, String nome, int telefone, int ddd, String email, String senha) throws Exception{
+		UsuarioBean u = new UsuarioBean(cpf, nome, telefone, ddd, email, senha);
+		return dao.update(u);
 	}
 	
 	public int deletar(String cpf) throws Exception{

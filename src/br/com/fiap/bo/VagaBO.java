@@ -14,17 +14,28 @@ public class VagaBO {
 	}
 	
 	//Verica se a vaga foi inserida
-	public boolean inserir(VagaBean e) throws Exception{
+	public boolean inserir(String nome, String descricao, double salario, String cnpj) throws Exception{
 		try{
-			dao.insert(e);
+			VagaBean v = new VagaBean();
+			v.setNm_vaga(nome);
+			v.setDs_vaga(descricao);
+			v.setVl_salario(salario);
+			v.setT_ONG_EMPRESA_nr_cnpj(cnpj);
+			dao.insert(v);
 			return true;
-		}catch (Exception f) {
+		}catch (Exception e) {
 			return false;
 		}
 	}
 	
-	public int atualizar(VagaBean e) throws Exception{
-		return dao.update(e);
+	public int atualizar(String nome, String descricao, double salario, String cnpj, int codigo) throws Exception{
+		VagaBean v = new VagaBean();
+		v.setNm_vaga(nome);
+		v.setDs_vaga(descricao);
+		v.setVl_salario(salario);
+		v.setT_ONG_EMPRESA_nr_cnpj(cnpj);
+		v.setCd_vaga(codigo);
+		return dao.update(v);
 	}
 	
 	public int deletar(int cd_vaga) throws Exception{
@@ -40,9 +51,9 @@ public class VagaBO {
 	}
 	
 	//Insere CPF do usuario na Vaga e faz a verificacao
-	public boolean insereCPF(String cpf) throws Exception{
+	public boolean insereCPF(String cpf, int id) throws Exception{
 		try{
-			dao.insertCPF(cpf);
+			dao.insertCPF(cpf, id);
 			return true;
 		}catch (Exception f) {
 			return false;

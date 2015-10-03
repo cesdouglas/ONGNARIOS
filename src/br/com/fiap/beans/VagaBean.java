@@ -4,7 +4,6 @@ package br.com.fiap.beans;
 public class VagaBean {
 	private int cd_vaga;
 	private String nm_vaga;
-	private int nr_vaga;
 	private String ds_vaga;
 	private double vl_salario;
 	private String T_ONG_USUARIO_nr_cpf;
@@ -16,7 +15,6 @@ public class VagaBean {
 		super();
 		this.cd_vaga = cd_vaga;
 		this.nm_vaga = nm_vaga;
-		this.nr_vaga = nr_vaga;
 		this.ds_vaga = ds_vaga;
 		this.vl_salario = vl_salario;
 		this.T_ONG_USUARIO_nr_cpf = t_ONG_USUARIO_nr_cpf;
@@ -43,13 +41,6 @@ public class VagaBean {
 		this.nm_vaga = nm_vaga;
 	}
 
-	public int getNr_vaga() {
-		return nr_vaga;
-	}
-
-	public void setNr_vaga(int nr_vaga) {
-		this.nr_vaga = nr_vaga;
-	}
 
 	public String getDs_vaga() {
 		return ds_vaga;

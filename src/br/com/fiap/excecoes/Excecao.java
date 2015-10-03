@@ -8,12 +8,16 @@ public class Excecao extends Exception{
 		} else if (e.getClass().toString()
 				.equals("class java.lang.ArrayIndexOfBound")) {
 			System.out.println("Limite excedido");
-		} else {
+		}else if(e.getClass().toString()
+				.equals("class java.lang.ArithmeticException")){
+			System.out.println("Erro Aritimético");
+		}else if(e.getClass().toString()
+				.equals("class java.lang.IllegalArgumentException")){
+			System.out.println("Parâmetro fornecido fora dos padrões estabelecidos");
+		}
+		else {
 			System.out.println("Erro desconhecido");
 			e.printStackTrace();
 		}
-	}
-	public Excecao (String x){
-		System.out.println(x);
 	}
 }

@@ -38,7 +38,6 @@ CREATE
   (
     cd_vaga               NUMBER (4) NOT NULL ,
     nm_vaga               VARCHAR2 (40) NOT NULL ,
-    nr_vaga               NUMBER (4) NOT NULL ,
     ds_vaga               VARCHAR2 (120) NOT NULL ,
     vl_salario            NUMBER (8,2) ,
     T_ONG_USUARIO_nr_cpf  VARCHAR2 (11) ,
