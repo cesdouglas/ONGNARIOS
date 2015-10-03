@@ -15,7 +15,7 @@ public class UsuarioBO {
 	//Verifica se inseriu o Usuario
 	public boolean inserir(String cpf, String nome, int telefone, int ddd, String email, String senha) throws Exception{
 		try{
-			UsuarioBean u = new UsuarioBean(cpf, nome, telefone, ddd, email, senha);
+			UsuarioBean u = new UsuarioBean(cpf, nome.toUpperCase(), telefone, ddd, email, senha);
 			dao.insert(u);
 			return true;
 		}catch(Exception f){
@@ -29,7 +29,7 @@ public class UsuarioBO {
 	}
 	
 	public int atualizar(String cpf, String nome, int telefone, int ddd, String email, String senha) throws Exception{
-		UsuarioBean u = new UsuarioBean(cpf, nome, telefone, ddd, email, senha);
+		UsuarioBean u = new UsuarioBean(cpf, nome.toUpperCase(), telefone, ddd, email, senha);
 		return dao.update(u);
 	}
 	

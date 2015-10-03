@@ -131,9 +131,8 @@ public class ONGNARIOS extends HttpServlet {
 	protected void inserirVaga(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
 		VagaBO bo = new VagaBO();
 		try{
-			//Recupera Session
 			//Setando vagas no beans
-			if (bo.inserir(request.getParameter("nome"), request.getParameter("descricao"), Double.parseDouble(request.getParameter("salario")),
+			if (bo.inserir(request.getParameter("nome"), request.getParameter("descricao"), request.getParameter("salario"),
 					request.getParameter("cnpj"))){
 				request.setAttribute("msg", "Vaga cadastrada com sucesso!");
 				request.getRequestDispatcher("index.jsp").forward(request, response);
@@ -234,7 +233,7 @@ public class ONGNARIOS extends HttpServlet {
 		VagaBO bo = new VagaBO();
 		try{
 			HttpSession session = request.getSession();
-			if(bo.atualizar(request.getParameter("nome"), request.getParameter("descricao"), Double.parseDouble(request.getParameter("salario")),
+			if(bo.atualizar(request.getParameter("nome"), request.getParameter("descricao"), request.getParameter("salario"),
 					(String)session.getAttribute("cnpj"), Integer.parseInt(request.getParameter("cd_vaga")))>0){
 				request.setAttribute("msg", "Dados atualizados com sucesso");
 				request.getRequestDispatcher("index.jsp").forward(request, response);				

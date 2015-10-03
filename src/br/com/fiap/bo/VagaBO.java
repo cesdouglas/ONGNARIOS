@@ -14,12 +14,13 @@ public class VagaBO {
 	}
 	
 	//Verica se a vaga foi inserida
-	public boolean inserir(String nome, String descricao, double salario, String cnpj) throws Exception{
+	public boolean inserir(String nome, String descricao, String salario, String cnpj) throws Exception{
 		try{
 			VagaBean v = new VagaBean();
-			v.setNm_vaga(nome);
-			v.setDs_vaga(descricao);
-			v.setVl_salario(salario);
+			v.setNm_vaga(nome.toUpperCase());
+			v.setDs_vaga(descricao.toUpperCase());
+			salario = salario.replaceAll(",", ".");
+			v.setVl_salario(Double.parseDouble(salario));
 			v.setT_ONG_EMPRESA_nr_cnpj(cnpj);
 			dao.insert(v);
 			return true;
@@ -28,11 +29,12 @@ public class VagaBO {
 		}
 	}
 	
-	public int atualizar(String nome, String descricao, double salario, String cnpj, int codigo) throws Exception{
+	public int atualizar(String nome, String descricao, String salario, String cnpj, int codigo) throws Exception{
 		VagaBean v = new VagaBean();
-		v.setNm_vaga(nome);
-		v.setDs_vaga(descricao);
-		v.setVl_salario(salario);
+		v.setNm_vaga(nome.toUpperCase());
+		v.setDs_vaga(descricao.toUpperCase());
+		salario = salario.replaceAll(",", ".");
+		v.setVl_salario(Double.parseDouble(salario));
 		v.setT_ONG_EMPRESA_nr_cnpj(cnpj);
 		v.setCd_vaga(codigo);
 		return dao.update(v);
@@ -47,7 +49,7 @@ public class VagaBO {
 	}
 	
 	public List<VagaBean> buscar(String nome) throws Exception{		
-		return dao.search(nome);
+		return dao.search(nome.toUpperCase());
 	}
 	
 	//Insere CPF do usuario na Vaga e faz a verificacao

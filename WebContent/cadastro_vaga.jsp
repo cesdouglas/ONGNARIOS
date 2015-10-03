@@ -51,9 +51,7 @@
 
 					<div class="6u 12u(mobilep)">
 						<input type="text" name="salario" required="required"
-							maxlength="10" placeholder="Salário">
-						<p style="font-size: 10px">*Utilize ponto ao invés de virgula
-							para separar o decimal</p>
+							maxlength="10" placeholder="Salário" id="salario">
 					</div>
 
 

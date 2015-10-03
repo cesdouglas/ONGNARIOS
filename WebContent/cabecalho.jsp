@@ -23,12 +23,12 @@
 		});
 
 	});
+	
 </script>
 <style>
 .mensagens, .mensagens2 {
 	position: absolute;
 	vertical-align: middle;
-	border: 2px solid #c30;
 	text-align: center;
 	display: none;
 	background-color: #37C0FB;

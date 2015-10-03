@@ -1850,15 +1850,19 @@
 	em, i {
 		font-style: italic;
 	}
-
-	p, ul, ol, dl, table, blockquote {
-		margin: 0 0 2em 0;
+	
+	p{
+		margin: -0.3em 0 2em 0;
+	}
+	
+	ul, ol, dl, table, blockquote {
+		margin: 1.7em 0 2em 0;
 	}
 
 	h1, h2, h3, h4, h5, h6 {
 		color: inherit;
 		font-weight: 600;
-		line-height: 1.75em;
+		line-height: 0.75em;
 		margin-bottom: 1em;
 	}
 
@@ -1992,7 +1996,7 @@
 		color: inherit;
 		font-weight: 600;
 		line-height: 1.75em;
-		margin-bottom: 0.5em;
+		margin-bottom: 0em;
 	}
 
 	::-webkit-input-placeholder {

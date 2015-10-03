@@ -14,7 +14,7 @@ public class EmpresaBO {
 	
 	//Trata erros da insercao e chama a funcao dao
 	public boolean inserir(String cnpj, String nome, String endereco, int telefone, int ddd, String email, String senha) throws Exception{
-		EmpresaBean e = new EmpresaBean(cnpj, nome, endereco, telefone, ddd, email, senha);
+		EmpresaBean e = new EmpresaBean(cnpj, nome.toUpperCase(), endereco.toUpperCase(), telefone, ddd, email, senha);
 		try{
 			dao.insert(e);
 			return true;
@@ -29,7 +29,7 @@ public class EmpresaBO {
 	}
 
 	public int atualizar(String cnpj, String nome, String endereco, int telefone, int ddd, String email, String senha) throws Exception{
-		EmpresaBean e = new EmpresaBean(cnpj, nome, endereco, telefone, ddd, email, senha);
+		EmpresaBean e = new EmpresaBean(cnpj, nome.toUpperCase(), endereco.toUpperCase(), telefone, ddd, email, senha);
 		return dao.update(e);
 	}
 
