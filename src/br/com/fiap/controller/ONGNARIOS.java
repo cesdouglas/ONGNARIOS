@@ -217,7 +217,7 @@ public class ONGNARIOS extends HttpServlet {
 				//Atualiza os atributos da empresa na sessão
 				session.setAttribute("empresa", bo.buscar(request.getParameter("cnpj")));
 				request.setAttribute("msg", "Dados atualizados com sucesso");
-				request.getRequestDispatcher("index.jsp").forward(request, response);
+				request.getRequestDispatcher("perfil.jsp").forward(request, response);
 			}else{
 				request.setAttribute("msg", "Ocorreu algum erro, verifique os campos");
 				request.getRequestDispatcher("perfil.jsp").forward(request, response);	
