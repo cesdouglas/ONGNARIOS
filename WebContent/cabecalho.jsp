@@ -69,17 +69,6 @@
 				<p>Olá ${usuario.nm_usuario}!</p>
 			</div>
 		</c:if>
-		<!-- Logout -->
-		<c:if test="${logado == 'sim'}">
-			<div id="button_log">
-				<form action="midlet" method="post">
-					<input type="hidden" name="form" value="logout"> <input
-						type="submit" value="Logout"
-						style="background: red; right: 50px; top: 44px; position: absolute;">
-				</form>
-			</div>
-		</c:if>
-
 
 		<!-- Header -->
 		<div id="header">

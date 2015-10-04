@@ -13,7 +13,11 @@
 			<li><a href="login.jsp">Login</a></li>
 		</c:if>
 		<c:if test="${!empty empresa.nr_cnpj}">
-				<li><a href="cadastro_vaga.jsp">Cadastrar Vaga</a></li>
+			<li><a href="cadastro_vaga.jsp">Cadastrar Vaga</a></li>
+		</c:if>
+		<!-- Logout -->
+		<c:if test="${logado == 'sim'}">
+			<li><a href="midlet?form=logout">Logout</a>
 		</c:if>
 	</ul>
 </nav>
@@ -106,7 +110,7 @@
 
 				<div class="2u 3u(mobilep)">
 					<input type="text" name="ddd" id="ddd" placeholder="ddd"
-						maxlength="2" required="required" value="${usuario.nr_ddd}"/>
+						maxlength="2" required="required" value="${usuario.nr_ddd}" />
 				</div>
 
 				<div class="4u 12u(mobilep)">

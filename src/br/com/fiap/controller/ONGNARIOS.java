@@ -340,6 +340,8 @@ public class ONGNARIOS extends HttpServlet {
 			//verifica o value do name=form e executa a funcao desejada
 			if(request.getParameter("form").equals("buscarVaga")){
 				procurarVaga(request,response);
+			}else if(request.getParameter("form").equals("logout")){
+				logoutAmbos(request,response);
 			}
 		}catch(Exception e){
 			response.sendRedirect("resultado.jsp");
@@ -365,8 +367,6 @@ public class ONGNARIOS extends HttpServlet {
 				loginUsuario(request,response);
 			}else if (request.getParameter("form").equals("loginEmpresa")){
 				loginEmpresa(request,response);
-			}else if(request.getParameter("form").equals("logout")){
-				logoutAmbos(request,response);
 			}else if(request.getParameter("form").equals("atualizarUsuario")){
 				atualizarUsuario(request,response);
 			}else if(request.getParameter("form").equals("atualizarEmpresa")){

@@ -12,7 +12,12 @@
 			<li><a href="parceiros.jsp">Parceiros</a></li>
 			<li><a href="perfil.jsp">Perfil</a></li>
 			<li><a href="vagas.jsp">Vagas</a></li>
-			<li><a href="cadastro_vaga.jsp" class="current">Cadastrar Vaga</a></li>
+			<li><a href="cadastro_vaga.jsp" class="current">Cadastrar
+					Vaga</a></li>
+			<!-- Logout -->
+			<c:if test="${logado == 'sim'}">
+				<li><a href="midlet?form=logout">Logout</a>
+			</c:if>
 		</ul>
 	</nav>
 

@@ -13,7 +13,11 @@
 			<li><a href="login.jsp">Login</a></li>
 		</c:if>
 		<c:if test="${!empty empresa.nr_cnpj}">
-				<li><a href="cadastro_vaga.jsp">Cadastrar Vaga</a></li>
+			<li><a href="cadastro_vaga.jsp">Cadastrar Vaga</a></li>
+		</c:if>
+		<!-- Logout -->
+		<c:if test="${logado == 'sim'}">
+			<li><a href="midlet?form=logout">Logout</a>
 		</c:if>
 	</ul>
 </nav>
@@ -86,9 +90,9 @@
 							<c:if test="${!empty usuario.nr_cpf}">
 								<c:if test="${empty n.t_ONG_USUARIO_nr_cpf}">
 									<form action="midlet" method="post">
-										<input type="hidden" name="form" value="inscrever">
-										<input type="hidden" name="cpf" value="${usuario.nr_cpf}">
-										<input type="hidden" name="id" value="${n.cd_vaga}"> <input
+										<input type="hidden" name="form" value="inscrever"> <input
+											type="hidden" name="cpf" value="${usuario.nr_cpf}"> <input
+											type="hidden" name="id" value="${n.cd_vaga}"> <input
 											type="submit" style="background-color: #37c0fb"
 											value="Inscreva-se">
 									</form>
@@ -96,11 +100,11 @@
 								<c:if test="${usuario.nr_cpf == n.t_ONG_USUARIO_nr_cpf}">
 									<form action="midlet" method="post">
 										<input type="hidden" name="form" value="desinscrever">
-										<input type="hidden" name="id" value="${n.cd_vaga}">
-										<input type="submit" style="background-color: red"
+										<input type="hidden" name="id" value="${n.cd_vaga}"> <input
+											type="submit" style="background-color: red"
 											value="Desinscrever-se">
 									</form>
-								</c:if>	
+								</c:if>
 							</c:if>
 						</div>
 					</div>
