@@ -86,6 +86,9 @@
 								Descrição: ${n.ds_vaga}<br> Salário:
 								<fmt:formatNumber value="${n.vl_salario}" type="currency" />
 								<br> CNPJ: ${n.t_ONG_EMPRESA_nr_cnpj}
+								<c:if test="${!empty n.t_ONG_USUARIO_nr_cpf && usuario.nr_cpf != n.t_ONG_USUARIO_nr_cpf}">
+									<br/><b>Número de inscrições excedido !</b>
+								</c:if>
 							</p>
 							<c:if test="${!empty usuario.nr_cpf}">
 								<c:if test="${empty n.t_ONG_USUARIO_nr_cpf}">
