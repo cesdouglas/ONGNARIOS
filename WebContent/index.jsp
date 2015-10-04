@@ -13,10 +13,8 @@
 			<li><a href="login.jsp">Login</a></li>
 		</c:if>
 		<c:if test="${!empty empresa.nr_cnpj}">
-				<li><a href="cadastro_vaga.jsp">Cadastrar Vaga</a></li>
+			<li><a href="cadastro_vaga.jsp">Cadastrar Vaga</a></li>
 		</c:if>
-		</div>
-
 	</ul>
 </nav>
 

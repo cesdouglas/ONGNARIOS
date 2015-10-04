@@ -106,7 +106,7 @@
 
 				<div class="2u 3u(mobilep)">
 					<input type="text" name="ddd" id="ddd" placeholder="ddd"
-						maxlength="2" required="required" / value="${usuario.nr_ddd}">
+						maxlength="2" required="required" value="${usuario.nr_ddd}"/>
 				</div>
 
 				<div class="4u 12u(mobilep)">
@@ -156,7 +156,7 @@
 	<c:if test="${!empty n && n.t_ONG_EMPRESA_nr_cnpj == empresa.nr_cnpj}">
 		<section class="6u 12u(narrower)" id="empresa"
 			style="margin-left: 330px; margin-top: 40px">
-			<h3>Editar Vagas</h3>
+			<h3>Editar ${n.nm_vaga}</h3>
 			<form action="midlet" method="post">
 
 				<div class="row 50%">
@@ -176,8 +176,7 @@
 						<input type="text" name="salario" id="salario"
 							placeholder="Sálário" maxlength="10" required="required"
 							value="${n.vl_salario}" />
-						<p style="font-size: 10px">*Utilize ponto ao invés de virgula
-							para separar o decimal</p>
+						<p style="font-size: 10px"></p>
 					</div>
 
 					<input type="hidden" name="cd_vaga" value="${n.cd_vaga}"> <input
@@ -193,7 +192,7 @@
 				<input type="hidden" name="form" value="apagarVaga"> <input
 					type="hidden" name="id" value="${n.cd_vaga}"> <input
 					type="submit" id="apagar" value="Apagar Vaga"
-					style="background: red; margin-left: 188px; margin-top: -51px; position: absolute;">
+					style="background: red; margin-left: 9.5em; margin-top: -2.75em; position: absolute;">
 			</form>
 			</li>
 			</ul>

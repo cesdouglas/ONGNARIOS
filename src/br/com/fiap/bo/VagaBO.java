@@ -29,13 +29,12 @@ public class VagaBO {
 		}
 	}
 	
-	public int atualizar(String nome, String descricao, String salario, String cnpj, int codigo) throws Exception{
+	public int atualizar(String nome, String descricao, String salario, int codigo) throws Exception{
 		VagaBean v = new VagaBean();
 		v.setNm_vaga(nome.toUpperCase());
 		v.setDs_vaga(descricao.toUpperCase());
 		salario = salario.replaceAll(",", ".");
 		v.setVl_salario(Double.parseDouble(salario));
-		v.setT_ONG_EMPRESA_nr_cnpj(cnpj);
 		v.setCd_vaga(codigo);
 		return dao.update(v);
 	}

@@ -54,12 +54,11 @@ public class VagaDAO {
 	
 	//Atualiza os dados da vaga
 	public int update(VagaBean e) throws Exception{
-		PreparedStatement estrutura = this.conexao.prepareStatement("UPDATE T_ONG_VAGA SET nm_vaga = ?, ds_vaga = ?, vl_salario = ?, T_ONG_EMPRESA_nr_cnpj = ? WHERE cd_vaga = ?");		
+		PreparedStatement estrutura = this.conexao.prepareStatement("UPDATE T_ONG_VAGA SET nm_vaga = ?, ds_vaga = ?, vl_salario = ? WHERE cd_vaga = ?");		
 		estrutura.setString(1, e.getNm_vaga());
 		estrutura.setString(2, e.getDs_vaga());
 		estrutura.setDouble(3, e.getVl_salario());
-		estrutura.setString(4, e.getT_ONG_EMPRESA_nr_cnpj());
-		estrutura.setInt(5, e.getCd_vaga());
+		estrutura.setInt(4, e.getCd_vaga());
 		int saida = estrutura.executeUpdate();
 		estrutura.close();
 		return saida;
