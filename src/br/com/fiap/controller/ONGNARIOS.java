@@ -275,11 +275,10 @@ public class ONGNARIOS extends HttpServlet {
 			if(bo.deletar(request.getParameter("cnpj"))>0){
 				request.setAttribute("msg", "Dados apagados com sucesso");
 				logoutAmbos(request,response);
-			}else{
-				request.setAttribute("msg", "Apague suas vagas cadastradas e tente novamente");
-				request.getRequestDispatcher("perfil.jsp").forward(request, response);	
 			}
 		}catch(Exception e){
+			request.setAttribute("msg", "Apague suas vagas cadastradas e tente novamente");
+			request.getRequestDispatcher("perfil.jsp").forward(request, response);
 			throw new Excecao(e);
 		}
 	}
