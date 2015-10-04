@@ -13,7 +13,7 @@
 			<li><a href="perfil.jsp">Perfil</a></li>
 			<li><a href="vagas.jsp">Vagas</a></li>
 			<li class="current"><a href="cadastro.jsp">Cadastre-se</a></li>
-
+			<li><a href="login.jsp">Login</a></li>
 		</ul>
 	</nav>
 

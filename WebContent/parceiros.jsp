@@ -8,8 +8,13 @@
 		<li class="current"><a href="parceiros.jsp">Parceiros</a></li>
 		<li><a href="perfil.jsp">Perfil</a></li>
 		<li><a href="vagas.jsp">Vagas</a></li>
-		<li><a href="cadastro.jsp">Cadastre-se</a></li>
-
+		<c:if test="${empty logado}">
+			<li><a href="cadastro.jsp">Cadastre-se</a></li>
+			<li><a href="login.jsp">Login</a></li>
+		</c:if>
+		<c:if test="${!empty empresa.nr_cnpj}">
+				<li><a href="cadastro_vaga.jsp">Cadastrar Vaga</a></li>
+		</c:if>
 	</ul>
 </nav>
 

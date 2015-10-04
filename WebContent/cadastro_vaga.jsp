@@ -12,8 +12,7 @@
 			<li><a href="parceiros.jsp">Parceiros</a></li>
 			<li><a href="perfil.jsp">Perfil</a></li>
 			<li><a href="vagas.jsp">Vagas</a></li>
-			<li><a href="cadastro.jsp">Cadastre-se</a></li>
-
+			<li><a href="cadastro_vaga.jsp" class="current">Cadastrar Vaga</a></li>
 		</ul>
 	</nav>
 

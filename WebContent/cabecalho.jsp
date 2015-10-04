@@ -69,19 +69,6 @@
 				<p>Olá ${usuario.nm_usuario}!</p>
 			</div>
 		</c:if>
-		<c:if test="${!empty empresa.nr_cnpj}">
-			<div id="button_log">
-				<a href="cadastro_vaga.jsp" class="button"
-					style="right: 300px; top: 44px; position: absolute;">Cadastrar
-					Vaga</a>
-			</div>
-		</c:if>
-		<c:if test="${empty logado}">
-			<div id="button_log">
-				<a href="login.jsp" class="button"
-					style="right: 50px; top: 44px; position: absolute;">Login</a>
-			</div>
-		</c:if>
 		<!-- Logout -->
 		<c:if test="${logado == 'sim'}">
 			<div id="button_log">

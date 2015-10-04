@@ -8,6 +8,7 @@
 		<li><a href="perfil.jsp">Perfil</a></li>
 		<li><a href="vagas.jsp">Vagas</a></li>
 		<li><a href="cadastro.jsp">Cadastre-se</a></li>
+		<li><a href="login.jsp" class="current">Login</a></li>
 	</ul>
 </nav>
 </div>
