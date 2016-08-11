@@ -1,0 +1,8 @@
+applications:
+- path: ongnarios.war
+  memory: 512M
+  instances: 1
+  domain: mybluemix.net
+  name: ongnarios
+  host: ongnarios
+  disk_quota: 1024M
