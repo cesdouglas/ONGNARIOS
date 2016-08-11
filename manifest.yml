@@ -1,5 +1,5 @@
 applications:
-- path: ongnarios.war
+- path: ONGNARIOS.war
   memory: 512M
   instances: 1
   domain: mybluemix.net
