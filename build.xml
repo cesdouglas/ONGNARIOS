@@ -49,6 +49,9 @@
 	      	<fileset dir="WebContent/WEB-INF/lib">
 	      	  <include name="*.jar"/>
 	      	</fileset>
+      		<fileset dir="src/br/com/fiap">
+	      	  <include name="**/*.java"/>
+	      	</fileset>
 	   </classpath>
     </javac>
   </target>
