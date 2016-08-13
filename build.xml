@@ -19,7 +19,7 @@
   
   <target name="init">
     <mkdir dir="bin" />
-    <copy includeemptydirs="false" todir="bin">
+    <copy includeemptydirs="true" todir="bin">
       <fileset dir="src">
       </fileset>
     </copy>
