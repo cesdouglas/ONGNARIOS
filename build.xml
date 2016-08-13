@@ -19,6 +19,7 @@
   
   <target name="init">
     <mkdir dir="bin" />
+    <mkdir dir="bin/src" />
     <copy includeemptydirs="false" todir="bin/src">
       <fileset dir="src/br/com/fiap">
         <exclude name="**/*.java" />
