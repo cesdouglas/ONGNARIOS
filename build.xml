@@ -20,8 +20,7 @@
   <target name="init">
     <mkdir dir="bin" />
     <copy includeemptydirs="true" todir="bin">
-      <fileset dir="src">
-      </fileset>
+      <fileset dir="src"/>
     </copy>
     <copy includeemptydirs="false" todir="bin">
       <fileset dir="WebContent" />
