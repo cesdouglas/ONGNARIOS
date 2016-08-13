@@ -53,7 +53,7 @@
   </target>
   
   <target name="build-war" depends="build-project">
-    <war destfile="${artifact_dir}/${warname}" basedir="bin" />
+    <war destfile="${artifact_dir}/${warname}" basedir="." />
   </target>
 
   
