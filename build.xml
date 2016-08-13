@@ -21,9 +21,7 @@
     <mkdir dir="bin" />
     <mkdir dir="bin/src" />
     <copy includeemptydirs="false" todir="bin/src">
-      <fileset dir="src/br/com/fiap">
-        <exclude name="**/*.java" />
-      </fileset>
+      <fileset dir="src"/>
     </copy>
     <copy includeemptydirs="false" todir="bin">
       <fileset dir="WebContent" />
