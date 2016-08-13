@@ -19,8 +19,10 @@
   
   <target name="init">
     <mkdir dir="bin" />
-    <copy includeemptydirs="true" todir="bin">
-      <fileset dir="src"/>
+    <copy includeemptydirs="false" todir="bin">
+      <fileset dir="src/br/com/fiap">
+      	<include name="**/*.java"/>
+      </fileset>
     </copy>
     <copy includeemptydirs="false" todir="bin">
       <fileset dir="WebContent" />
@@ -53,7 +55,7 @@
   </target>
   
   <target name="build-war" depends="build-project">
-    <war destfile="${artifact_dir}/${warname}" basedir="." />
+    <war destfile="${artifact_dir}/${warname}" basedir="bin" />
   </target>
 
   
